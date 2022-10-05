@@ -1,0 +1,6 @@
+# git ignore
+
+Info.plist
+.DS_Store
+/Pods
+
