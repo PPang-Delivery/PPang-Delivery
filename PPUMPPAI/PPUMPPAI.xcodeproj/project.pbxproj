@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+
 		138A3C63CC8172DF9C0D088A /* Pods_PPUMPPAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE211AB0FF1E9BA70307A10F /* Pods_PPUMPPAI.framework */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
@@ -138,6 +139,7 @@
 		CDBB84AD28E9698500D6FCC4 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				64FA2EFD28ED8A5700AF3274 /* PPang.png */,
 				CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */,
 				CDBB849028E83AD500D6FCC4 /* LaunchScreen.storyboard */,
 				CDBB849328E83AD500D6FCC4 /* Info.plist */,
@@ -215,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849228E83AD500D6FCC4 /* LaunchScreen.storyboard in Resources */,
+				64FA2EFE28ED8A5700AF3274 /* PPang.png in Resources */,
 				CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
