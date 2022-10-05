@@ -10,19 +10,21 @@ import SnapKit
 import NMapsMap
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate {
 	//	lazy var mainVC = MainViewController()
 	
 	var naverMapView = NMFMapView()
+    
+    var centerPin = NMFMarker()
 	
-	lazy var myLocation: UIButton = {
+	lazy var myLocationButton: UIButton = {
 		let btn = UIButton()
 		btn.setTitle("My Location", for: .normal)
 		btn.backgroundColor = UIColor.red
 		return btn
 	}()
 	
-	lazy var orderTogether: UIButton = {
+	lazy var orderTogetherButton: UIButton = {
 		let btn = UIButton()
 		btn.setTitle("같이 먹어요 []", for: .normal)
 		btn.backgroundColor = UIColor.blue
@@ -36,14 +38,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 		manager.delegate = self
 		return manager
 	}()
-	
+    	
 	var coordinate = NMGLatLng(lat: 37.488205, lng: 127.064789)
 	// MARK: - 개포 새롬관 NMGLatLng(lat: 37.488205, lng: 127.064789)
+    var currentCameraPosition = NMGLatLng(lat: 37.488205, lng: 127.064789)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setup()
 		layout()
+        markcenterPin()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -53,25 +57,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 	override func viewWillDisappear(_ animated: Bool) {
 		self.locationManager.stopUpdatingLocation()
 	}
+    
+    func markcenterPin() {
+        centerPin.position = NMGLatLng(
+                    lat: coordinate.lat,
+                    lng: coordinate.lng
+        )
+        centerPin.mapView = naverMapView
+    }
 	
 	func setup() {
 		mapInit()
 	}
 	
 	func layout() {
-		naverMapView.addSubview(myLocation)
-		myLocation.addTarget(self, action: #selector(didTappedCurrentLocation(_:)), for: .touchDown)
-		myLocation.snp.makeConstraints {
+		naverMapView.addSubview(myLocationButton)
+        
+		myLocationButton.addTarget(self, action: #selector(didTappedCurrentLocation(_:)), for: .touchDown)
+		myLocationButton.snp.makeConstraints {
 			$0.top.equalTo(view.safeAreaLayoutGuide)
 		}
 		
-		naverMapView.addSubview(orderTogether)
-		orderTogether.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
-		orderTogether.snp.makeConstraints {
+		naverMapView.addSubview(orderTogetherButton)
+		orderTogetherButton.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
+		orderTogetherButton.snp.makeConstraints {
 			$0.top.equalTo(view.safeAreaLayoutGuide)
 			$0.right.equalTo(view.safeAreaLayoutGuide)
 		}
+        naverMapView.addCameraDelegate(delegate: self)
+        
 	}
+    
+    func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+        print("카메라 이동끝")
+        let cameraPosition = mapView.cameraPosition
+        currentCameraPosition.lat = cameraPosition.target.lat
+        currentCameraPosition.lng = cameraPosition.target.lng
+        print(currentCameraPosition.lat, currentCameraPosition.lng)
+        
+        centerPin.position = NMGLatLng(lat: cameraPosition.target.lat, lng: cameraPosition.target.lng)
+    }
 	
 	func mapInit() {
 		naverMapView = NMFMapView(frame: view.frame)
@@ -84,14 +109,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 	
 	func focusPurposeLocation(_ coordinate: NMGLatLng, _ zoomSize: Double) {
 		let focus = NMFCameraUpdate(scrollTo: coordinate, zoomTo: zoomSize)
+        focus.animation = .easeIn
 		focus.pivot = CGPoint(x: 0.5, y: 0.5)
 		naverMapView.moveCamera(focus)
 	}
-	
+    
 	func getLocationUsagePermission() {
 		self.locationManager.requestWhenInUseAuthorization()
 	}
-	
+
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		switch status {
 		case .authorizedAlways, .authorizedWhenInUse:
@@ -126,7 +152,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		print("error") // 위치 가져오기 실패
 	}
-	
+    
 	@objc
 	private func didTappedCurrentLocation(_ sender: UIButton) {
 		focusPurposeLocation(coordinate, 16.5)
@@ -135,5 +161,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 	@objc
 	private func didTappedOrderTogether(_ sender: UIButton) {
 		print("같이 먹어용 버튼 클릭됨")
+        let orderTogeterMarker = NMFMarker()
+        orderTogeterMarker.iconTintColor = .red
+        orderTogeterMarker.position = NMGLatLng(lat: currentCameraPosition.lat, lng: currentCameraPosition.lng)
+        orderTogeterMarker.mapView = naverMapView
+        
 	}
+//    func initMapDB() {
+//        DispatchQueue.global(qos: .default).async {
+//            // 백그라운드 스레드
+//            var markers = [NMFMarker]()
+//            for index in 1...1000 {
+//                let marker = NMFMarker(position: NMGLatLng(lat: Double.random(in: 37.4...37.9),
+//                                                           lng: Double.random(in: 126.8...127.1))
+//                )
+//                marker.captionText = String(index)
+//                markers.append(marker)
+//            }
+//
+//            DispatchQueue.main.async { [weak self] in
+//                // 메인 스레드
+//                for marker in markers {
+//                    marker.mapView = self?.naverMapView
+//                }
+//            }
+//        }
+//    }
 }
