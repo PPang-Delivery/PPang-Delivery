@@ -20,7 +20,7 @@ class MainViewController: UITabBarController {
         // Do any additional setup after loading the view.
         
         setupTabBar()
-        
+
         homeVC.setTabBarImage(imageName: "house.fill", title: "Home")
         mapVC.setTabBarImage(imageName: "map.fill", title: "Map")
         chatVC.setTabBarImage(imageName: "message.fill", title: "Message")
@@ -32,7 +32,7 @@ class MainViewController: UITabBarController {
         let nc4 = UINavigationController(rootViewController: profileVC)
 
         let navBarAppearance = UINavigationBarAppearance()
-        
+
 //        navBarAppearance.configureWithTransparentBackground()
 //        navBarAppearance.configureWithOpaqueBackground()
 //        navBarAppearance.backgroundColor = .black
@@ -41,7 +41,6 @@ class MainViewController: UITabBarController {
         navBarAppearance.backgroundEffect = .init(style: .dark)
         
         nc1.navigationBar.standardAppearance = navBarAppearance
-        nc1.navigationBar.compactAppearance = navBarAppearance
         nc1.navigationBar.scrollEdgeAppearance = navBarAppearance
         nc2.navigationBar.standardAppearance = navBarAppearance
         nc2.navigationBar.scrollEdgeAppearance = navBarAppearance
@@ -56,9 +55,9 @@ class MainViewController: UITabBarController {
 //        nc4.navigationBar.insertSubview(makeBlurView(nc4.navigationBar.bounds), at: 0)
         
         nc1.navigationBar.topItem?.title = "Home"
-        nc1.navigationBar.prefersLargeTitles = true
+//        nc1.navigationBar.prefersLargeTitles = true
         nc2.navigationBar.topItem?.title = "Map"
-        nc2.navigationBar.prefersLargeTitles = true
+//        nc2.navigationBar.prefersLargeTitles = true
         nc3.navigationBar.topItem?.title = "Chat"
         nc3.navigationBar.prefersLargeTitles = true
         nc4.navigationBar.topItem?.title = "Profile"
