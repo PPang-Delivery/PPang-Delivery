@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  PPangDelivery
 //
-//  Created by 마석우 on 2022/10/01.
+//  Created by 빵딜 on 2022/10/01.
 //
 
 import UIKit
