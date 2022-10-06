@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		70CB0B8028EDBFBE0091AB33 /* PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* PPang.png */; };
+		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
 		CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */; };
@@ -22,8 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		64B7371728EEBD72002A6B75 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PPangDelivery.app; path = "/Users/chan/Documents/GitHub/chanheki/current/ppang/PPangDelivery/build/Debug-iphoneos/PPangDelivery.app"; sourceTree = "<absolute>"; };
-		70CB0B7F28EDBFBE0091AB33 /* PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PPang.png; sourceTree = "<group>"; };
+		64B7371928EEBDDB002A6B75 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PPangDelivery.app; path = "/Users/chan/Documents/GitHub/chanheki/current/ppang/PPangDelivery/build/Debug-iphoneos/PPangDelivery.app"; sourceTree = "<absolute>"; };
+		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		CDBB84AD28E9698500D6FCC4 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				70CB0B7F28EDBFBE0091AB33 /* PPang.png */,
+				70CB0B7F28EDBFBE0091AB33 /* _PPang.png */,
 				CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */,
 				CDBB849028E83AD500D6FCC4 /* LaunchScreen.storyboard */,
 				CDBB849328E83AD500D6FCC4 /* Info.plist */,
@@ -159,7 +159,7 @@
 			);
 			name = PPangDelivery;
 			productName = PPUMPPAI;
-			productReference = 64B7371728EEBD72002A6B75 /* PPangDelivery.app */;
+			productReference = 64B7371928EEBDDB002A6B75 /* PPangDelivery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -201,7 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849228E83AD500D6FCC4 /* LaunchScreen.storyboard in Resources */,
-				70CB0B8028EDBFBE0091AB33 /* PPang.png in Resources */,
+				70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */,
 				CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
