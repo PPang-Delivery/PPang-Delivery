@@ -8,6 +8,11 @@ target 'PPangDelivery' do
 	pod 'SnapKit', '~> 5.6.0'
 	pod 'NMapsMap', '~> 3.15.0'
 
-  # Pods for PPangDelivery
+	pod 'FirebaseAnalytics'
+	pod 'FirebaseAuth'
+	pod 'FirebaseFirestore'
+	
+	pod 'Then'
 
+  # Pods for PPangDelivery
 end
