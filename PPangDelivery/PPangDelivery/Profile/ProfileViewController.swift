@@ -36,13 +36,17 @@ class ProfileViewController: UIViewController {
 		let blackBox = UIView()
 		let vContent = UIView()
 		
-		if let user = Auth.auth().currentUser {
+		if let _ = Auth.auth().currentUser {
 			vContent.isHidden = true
 			blackBox.isHidden = false
 		} else {
 			vContent.isHidden = false
 			blackBox.isHidden = true
 		}
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+		blackBox.addGestureRecognizer(tapGesture)
+		
 		
 		view.addSubview(blackBox)
 		blackBox.then {
@@ -55,9 +59,9 @@ class ProfileViewController: UIViewController {
 		view.addSubview(vContent)
 		vContent.snp.makeConstraints {
 			$0.center.equalTo(view.safeAreaLayoutGuide)
-//				.offset(-100)
+			//				.offset(-100)
 			$0.width.height.equalTo(200)
-//			$0.left.equalTo(view.safeAreaLayoutGuide)
+			//			$0.left.equalTo(view.safeAreaLayoutGuide)
 		}
 		
 		let stvCell = UIStackView()
@@ -100,7 +104,7 @@ class ProfileViewController: UIViewController {
 			$0.height.equalTo(40.0)
 			$0.left.right.equalToSuperview()
 		}
-
+		
 		stvCell.addArrangedSubview(signUpButton)
 		signUpButton.then {
 			$0.setTitle("Sign Up", for: .normal)
@@ -134,5 +138,16 @@ class ProfileViewController: UIViewController {
 			}
 		}
 	}
+	
+	@objc func handleTap(sender: UITapGestureRecognizer) {
+		print("signinbutton press")
+		let firebaseAuth = Auth.auth()
+		do {
+			try firebaseAuth.signOut()
+		} catch let signOutError as NSError {
+			print("Error signing out: %@", signOutError)
+		}
+	}
+	
 }
 
