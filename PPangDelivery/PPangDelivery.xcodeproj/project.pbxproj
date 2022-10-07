@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52C9985C75B0CCDC9C7665CB /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */; };
+		6404FCDA28EF178400A63FEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6443632628EF114900324D27 /* Config.xcconfig */; };
+		6443632528EF0DD400324D27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6443632428EF0DD400324D27 /* GoogleService-Info.plist */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
@@ -22,8 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		64B7371928EEBDDB002A6B75 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PPangDelivery.app; path = "/Users/chan/Documents/GitHub/chanheki/current/ppang/PPangDelivery/build/Debug-iphoneos/PPangDelivery.app"; sourceTree = "<absolute>"; };
+		1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
+		6443632128EF054200324D27 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPangDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6443632428EF0DD400324D27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6443632628EF114900324D27 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Resource/Config.xcconfig; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
+		BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,6 +43,7 @@
 		CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CDBB84A728E9686100D6FCC4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CDBB84A928E9687000D6FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +51,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C9985C75B0CCDC9C7665CB /* Pods_PPangDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		113B0DB09E91B32B747404AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */,
+				1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		64B7371228EEBBA5002A6B75 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,10 +84,21 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		91895F19824D1A61DE39A712 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CDBB847928E83AD300D6FCC4 = {
 			isa = PBXGroup;
 			children = (
 				CDBB848428E83AD300D6FCC4 /* PPangDelivery */,
+				113B0DB09E91B32B747404AF /* Pods */,
+				91895F19824D1A61DE39A712 /* Frameworks */,
+				6443632128EF054200324D27 /* PPangDelivery.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,7 +164,9 @@
 				70CB0B7F28EDBFBE0091AB33 /* _PPang.png */,
 				CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */,
 				CDBB849028E83AD500D6FCC4 /* LaunchScreen.storyboard */,
+				6443632628EF114900324D27 /* Config.xcconfig */,
 				CDBB849328E83AD500D6FCC4 /* Info.plist */,
+				6443632428EF0DD400324D27 /* GoogleService-Info.plist */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -159,7 +190,7 @@
 			);
 			name = PPangDelivery;
 			productName = PPUMPPAI;
-			productReference = 64B7371928EEBDDB002A6B75 /* PPangDelivery.app */;
+			productReference = 6443632128EF054200324D27 /* PPangDelivery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -201,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849228E83AD500D6FCC4 /* LaunchScreen.storyboard in Resources */,
+				6404FCDA28EF178400A63FEA /* Config.xcconfig in Resources */,
+				6443632528EF0DD400324D27 /* GoogleService-Info.plist in Resources */,
 				70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */,
 				CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */,
 			);
@@ -399,6 +432,7 @@
 		};
 		CDBB849728E83AD500D6FCC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -407,6 +441,8 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -417,7 +453,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.ma.seokwoo.PPangDelivery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ppd.PPangDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -427,6 +463,7 @@
 		};
 		CDBB849828E83AD500D6FCC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -435,6 +472,8 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -445,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.ma.seokwoo.PPangDelivery;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ppd.PPangDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
