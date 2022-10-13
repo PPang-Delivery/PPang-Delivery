@@ -56,7 +56,7 @@ class MainViewController: UITabBarController {
         
         nc1.navigationBar.topItem?.title = "Home"
 //        nc1.navigationBar.prefersLargeTitles = true
-        nc2.navigationBar.topItem?.title = "Map"
+//        nc2.navigationBar.topItem?.title = "Map"
 //        nc2.navigationBar.prefersLargeTitles = true
         nc3.navigationBar.topItem?.title = "Chat"
         nc3.navigationBar.prefersLargeTitles = true

@@ -19,11 +19,15 @@
 		CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */; };
 		CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A728E9686100D6FCC4 /* ProfileViewController.swift */; };
 		CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A928E9687000D6FCC4 /* HomeViewController.swift */; };
+		DD40DB4BBBECE3CE1F216D25 /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B29AC15F41BEF287F564681 /* Pods_PPangDelivery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		64B7371928EEBDDB002A6B75 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = PPangDelivery.app; path = "/Users/chan/Documents/GitHub/chanheki/current/ppang/PPangDelivery/build/Debug-iphoneos/PPangDelivery.app"; sourceTree = "<absolute>"; };
+		1B29AC15F41BEF287F564681 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
+		A15D572E28EFCD7700114915 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPangDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0D5B6DF5DD97E19F2950F5 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
+		BA263DDE7F28AFA63261A847 /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,12 +47,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD40DB4BBBECE3CE1F216D25 /* Pods_PPangDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E9808979FE94709B7D047CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B29AC15F41BEF287F564681 /* Pods_PPangDelivery.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		64B7371228EEBBA5002A6B75 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,10 +79,22 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		8D5E9CFB1555EB81C1E7A9EB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D5B6DF5DD97E19F2950F5 /* Pods-PPangDelivery.debug.xcconfig */,
+				BA263DDE7F28AFA63261A847 /* Pods-PPangDelivery.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CDBB847928E83AD300D6FCC4 = {
 			isa = PBXGroup;
 			children = (
 				CDBB848428E83AD300D6FCC4 /* PPangDelivery */,
+				8D5E9CFB1555EB81C1E7A9EB /* Pods */,
+				3E9808979FE94709B7D047CC /* Frameworks */,
+				A15D572E28EFCD7700114915 /* PPangDelivery.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,7 +184,7 @@
 			);
 			name = PPangDelivery;
 			productName = PPUMPPAI;
-			productReference = 64B7371928EEBDDB002A6B75 /* PPangDelivery.app */;
+			productReference = A15D572E28EFCD7700114915 /* PPangDelivery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -399,12 +424,13 @@
 		};
 		CDBB849728E83AD500D6FCC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0D5B6DF5DD97E19F2950F5 /* Pods-PPangDelivery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VBHJCPK49S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -427,12 +453,13 @@
 		};
 		CDBB849828E83AD500D6FCC4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA263DDE7F28AFA63261A847 /* Pods-PPangDelivery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = VBHJCPK49S;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
