@@ -42,8 +42,8 @@ class MainViewController: UITabBarController {
         
         nc1.navigationBar.standardAppearance = navBarAppearance
         nc1.navigationBar.scrollEdgeAppearance = navBarAppearance
-        nc2.navigationBar.standardAppearance = navBarAppearance
-        nc2.navigationBar.scrollEdgeAppearance = navBarAppearance
+//        nc2.navigationBar.standardAppearance = navBarAppearance
+//        nc2.navigationBar.scrollEdgeAppearance = navBarAppearance
         nc3.navigationBar.standardAppearance = navBarAppearance
         nc3.navigationBar.scrollEdgeAppearance = navBarAppearance
         nc4.navigationBar.standardAppearance = navBarAppearance
@@ -64,7 +64,7 @@ class MainViewController: UITabBarController {
         nc4.navigationBar.prefersLargeTitles = true
 
         nc1.navigationBar.tintColor = appColor
-        nc2.navigationBar.tintColor = appColor
+//        nc2.navigationBar.tintColor = appColor
         nc3.navigationBar.tintColor = appColor
         nc4.navigationBar.tintColor = appColor
         

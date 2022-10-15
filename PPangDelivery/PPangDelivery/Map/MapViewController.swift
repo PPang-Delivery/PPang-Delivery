@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import NMapsMap
 import CoreLocation
-
+import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
     
@@ -23,6 +23,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     var address = ""
     
     let searchController = UISearchController()
+    
+    let searchRequest = MKLocalSearch.Request()
+    
     
     lazy var myLocationButton: UIButton = {
         let btn = UIButton()
@@ -54,9 +57,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         super.viewDidLoad()
         setup()
         layout()
+        markcenterPin()
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-        markcenterPin()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,22 +174,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     @objc
     private func didTappedCurrentLocation(_ sender: UIButton) {
         focusPurposeLocation(coordinate, 16.5)
-        print(address)
-        CLGeocoder().geocodeAddressString(address, completionHandler: { placemarks, error in
-            if (error != nil) {
-                print(error.debugDescription)
+        searchRequest.naturalLanguageQuery = address
+        
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { [self] response, error in
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error").")
                 return
             }
-            
-            if let placemark = placemarks?[0]  {
-                let lat = String(format: "%.04f", (placemark.location?.coordinate.longitude ?? 0.0)!)
-                let lon = String(format: "%.04f", (placemark.location?.coordinate.latitude ?? 0.0)!)
-                let name = placemark.name!
-                let country = placemark.country!
-                let region = placemark.administrativeArea!
-                print("\(lat),\(lon)\n\(name),\(region) \(country)")
+
+            for item in response.mapItems {
+                print("강남역: ", item.placemark.coordinate.latitude, item.placemark.coordinate.longitude )
+                self.focusPurposeLocation(NMGLatLng(lat: item.placemark.coordinate.latitude, lng: item.placemark.coordinate.longitude), 16)
             }
-        })
+        }
     }
     
     @objc
