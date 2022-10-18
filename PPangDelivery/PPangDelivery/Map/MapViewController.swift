@@ -10,6 +10,7 @@ import SnapKit
 import NMapsMap
 import CoreLocation
 
+@available(iOS 16.0, *)
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate {
     //	lazy var mainVC = MainViewController()
     
@@ -180,8 +181,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     //        orderTogeterMarker.mapView = naverMapView
 }
 
-
-
 //    func initMapDB() {
 //        DispatchQueue.global(qos: .default).async {
 //            // 백그라운드 스레드
@@ -211,19 +210,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
 //    }
 //}
 
-
-
-
 // MARK: - PPangTogetherPopup
 
-class PopUpViewController: UIViewController {
+class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return members.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return members[row]
+    }
+    
     private var titleText: String?
     private var messageText: String?
     private var attributedMessageText: NSAttributedString?
     private var contentView: UIView?
+    private let members: [String] = ["1","2","3","4","5","6","7","8"]
     
     private lazy var containerView: UIView = {
         let view = UIView()
+        // popup animation test
         //        UIView.animate(withDuration: 0.3, delay: 10, options: [], animations: {
         //
         //                    view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
@@ -238,7 +248,7 @@ class PopUpViewController: UIViewController {
     private lazy var containerStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.spacing = 50.0
+        view.spacing = 15.0
         view.alignment = .center
         
         return view
@@ -252,7 +262,49 @@ class PopUpViewController: UIViewController {
         return view
     }()
     
-    private lazy var titleLabel: UILabel? = {
+    private lazy var foodStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .center
+        view.spacing = 5.0
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    private lazy var v1FoodStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 5.0
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    private lazy var v2FoodStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 5.0
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    private lazy var v3FoodStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 5.0
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    private lazy var v4FoodStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 5.0
+        view.distribution = .fillProportionally
+        
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = titleText
         label.textAlignment = .center
@@ -263,13 +315,25 @@ class PopUpViewController: UIViewController {
         return label
     }()
     
+    private lazy var userInputText: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 10.0)
+        textField.center = self.view.center
+        textField.placeholder = "시키실 메뉴의 가게 이름과 추가로 요하는 정보를 기입해주세요"
+        //        textField.text = "UITextField example"
+        textField.borderStyle = UITextField.BorderStyle.line
+        textField.textColor = UIColor.blue
+        
+        return textField
+    }()
+    
     private lazy var messageLabel: UILabel? = {
         guard messageText != nil || attributedMessageText != nil else { return nil }
         
         let label = UILabel()
-        label.text = messageText
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 16.0)
+        label.text = ("빵하실 위치 :  "+messageText!)
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 10.0)
         label.textColor = .gray
         label.numberOfLines = 0
         
@@ -280,6 +344,27 @@ class PopUpViewController: UIViewController {
         return label
     }()
     
+    private lazy var dueTime: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        datePicker.preferredDatePickerStyle = .automatic
+        datePicker.datePickerMode = .time
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.timeZone = .autoupdatingCurrent
+        
+        return datePicker
+    }()
+    
+    lazy var numberOfMember: UIPickerView = {
+        let picker = UIPickerView()
+        picker.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+        picker.backgroundColor = .white
+        picker.delegate = self
+        picker.dataSource = self
+        
+        return picker
+    }()
+    
     convenience init(titleText: String? = nil,
                      messageText: String? = nil,
                      attributedMessageText: NSAttributedString? = nil) {
@@ -288,7 +373,6 @@ class PopUpViewController: UIViewController {
         self.titleText = titleText
         self.messageText = messageText
         self.attributedMessageText = attributedMessageText
-        /// present 시 fullScreen (화면을 덮도록 설정) -> 설정 안하면 pageSheet 형태 (위가 좀 남아서 밑에 깔린 뷰가 보이는 형태)
         modalPresentationStyle = .overFullScreen
     }
     
@@ -305,12 +389,12 @@ class PopUpViewController: UIViewController {
         setupViews()
         addSubviews()
         makeConstraints()
+        makeFoodStack()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // curveEaseOut: 시작은 천천히, 끝날 땐 빠르게
         UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = false
@@ -320,7 +404,6 @@ class PopUpViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // curveEaseIn: 시작은 빠르게, 끝날 땐 천천히
         UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseIn) { [weak self] in
             self?.containerView.transform = .identity
             self?.containerView.isHidden = true
@@ -336,16 +419,13 @@ class PopUpViewController: UIViewController {
         let button = UIButton()
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         
-        // enable
         button.setTitle(title, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
         button.setBackgroundImage(backgroundColor.image(), for: .normal)
         
-        // disable
         button.setTitleColor(.gray, for: .disabled)
         button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
         
-        // layer
         button.layer.cornerRadius = 4.0
         button.layer.masksToBounds = true
         
@@ -355,10 +435,55 @@ class PopUpViewController: UIViewController {
         
         buttonStackView.addArrangedSubview(button)
     }
+    public func makeFoodStack() {
+        let stackFoodList = ["족발/보쌈", "찜/탕/찌개", "돈까스/회/일식", "피자", "치킨", "고기/구이", "야식", "양식", "중식", "아시안", "백반/죽/국수", "도시락", "분식", "카페/디저트", "패스트푸드", "채식"]
+        let foodTitleLabel = UILabel()
+        foodTitleLabel.text = "메뉴 종류를 선택 해 주세요"
+        foodTitleLabel.textAlignment = .center
+        foodTitleLabel.font = .systemFont(ofSize: 20.0)
+        foodTitleLabel.textColor = .black
+        foodTitleLabel.numberOfLines = 0
+        foodTitleLabel.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+        
+        for (index, foodText) in stackFoodList.enumerated() {
+            let button = UIButton()
+            button.titleLabel?.font = .systemFont(ofSize: 10.0, weight: .bold)
+            button.contentVerticalAlignment = .bottom
+            button.setTitle(foodText, for: .normal)
+            //            button.setImage(UIImage(systemName: foodText), for: .normal)
+            button.setTitleColor(.red, for: .normal)
+            button.backgroundColor = .yellow
+            button.layer.masksToBounds = false
+            button.snp.makeConstraints { make in
+                //                make.width.equalTo(containerView.snp.width).dividedBy(4)
+                make.height.width.equalTo(66)
+            }
+            //button ui code with then
+            //            button.then {
+            //            }
+            switch (index % 4) {
+            case 0: v1FoodStackView.addArrangedSubview(button)
+            case 1: v2FoodStackView.addArrangedSubview(button)
+            case 2: v3FoodStackView.addArrangedSubview(button)
+            case 3: v4FoodStackView.addArrangedSubview(button)
+            default:
+                print("")
+            }
+        }
+        foodStackView.addArrangedSubview(foodTitleLabel)
+        foodStackView.addArrangedSubview(v1FoodStackView)
+        foodStackView.addArrangedSubview(v2FoodStackView)
+        foodStackView.addArrangedSubview(v3FoodStackView)
+        foodStackView.addArrangedSubview(v4FoodStackView)
+        //button action code
+        //            view.itemButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
+        //        }
+    }
     
     private func setupViews() {
         view.addSubview(containerView)
         containerView.addSubview(containerStackView)
+        
         view.backgroundColor = .black.withAlphaComponent(0.2)
     }
     
@@ -368,57 +493,48 @@ class PopUpViewController: UIViewController {
         if let contentView = contentView {
             containerStackView.addSubview(contentView)
         } else {
-            if let titleLabel = titleLabel {
-                containerStackView.addArrangedSubview(titleLabel)
-            }
-            
             if let messageLabel = messageLabel {
                 containerStackView.addArrangedSubview(messageLabel)
+                messageLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
             }
+            //title appear
+            //            if let titleLabel = titleLabel {
+            //                containerStackView.addArrangedSubview(titleLabel)
+            //            }
+            containerStackView.addArrangedSubview(foodStackView)
+            containerStackView.addArrangedSubview(dueTime)
+            containerStackView.addArrangedSubview(numberOfMember)
+            containerStackView.addArrangedSubview(userInputText)
         }
-        
-        if let lastView = containerStackView.subviews.last {
-            containerStackView.setCustomSpacing(24.0, after: lastView)
-        }
-        
+        //        if let lastView = containerStackView.subviews.last {
+        //            containerStackView.setCustomSpacing(24.0, after: lastView)
+        //        }
         containerStackView.addArrangedSubview(buttonStackView)
     }
     
     private func makeConstraints() {
-                containerView.translatesAutoresizingMaskIntoConstraints = false
-                containerStackView.translatesAutoresizingMaskIntoConstraints = false
-                buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
-                NSLayoutConstraint.activate([
-                    containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                    containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 26),
-                    containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
-                    containerView.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: 32),
-                    containerView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -32),
-        
-                    containerStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
-                    containerStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-                    containerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -24),
-                    containerStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
-        
-                    buttonStackView.heightAnchor.constraint(equalToConstant: 48),
-                    buttonStackView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor)
-                ])
+        containerView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(view).offset(25)
+            make.trailing.equalTo(view).inset(25)
+        }
+        NSLayoutConstraint.activate([
+            containerStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
+            containerStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            containerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -24),
+            containerStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+            
+            buttonStackView.heightAnchor.constraint(equalToConstant: 48),
+            buttonStackView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor)
+        ])
     }
 }
 
+
 // MARK: - Extension
-//import Contacts
-//
-//extension CLPlacemark {
-//    var formattedAddress: String? {
-//        guard let postalAddress = postalAddress else {
-//            return nil
-//        }
-//        let formatter = CNPostalAddressFormatter()
-//        return formatter.string(from: postalAddress)
-//    }
-//}
 
 extension UIColor {
     /// Convert color to image
@@ -469,7 +585,7 @@ extension UIControl {
 }
 
 extension UIViewController {
-    func showPopUp(title: String = "빵해요",
+    func showPopUp(title: String = "food list",
                    message: String? = nil,
                    attributedMessage: NSAttributedString? = nil,
                    leftActionTitle: String? = "취소",
