@@ -12,6 +12,8 @@ target 'PPangDelivery' do
 	pod 'FirebaseAuth'
 	pod 'FirebaseFirestore'
 	
+	pod 'GoogleSignIn', '~> 5.0.2'
+	
 	pod 'Then'
 
   # Pods for PPangDelivery
