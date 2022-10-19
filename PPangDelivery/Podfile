@@ -7,6 +7,7 @@ target 'PPangDelivery' do
 
 	pod 'SnapKit', '~> 5.6.0'
 	pod 'NMapsMap', '~> 3.15.0'
+	pod 'Then'
 
 	pod 'FirebaseAnalytics'
 	pod 'FirebaseAuth'
