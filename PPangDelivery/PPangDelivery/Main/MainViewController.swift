@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-@available(iOS 16.0, *)
 class MainViewController: UITabBarController {
     
     let homeVC = HomeViewController()
