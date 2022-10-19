@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 let appColor: UIColor = .appColor
 
@@ -13,11 +14,10 @@ let appColor: UIColor = .appColor
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
     let mainVC = MainViewController()
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+		
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        mainVC.setStatusBar()
         window?.rootViewController = mainVC
 //        mainVC.selectedIndex = 1
+		FirebaseApp.configure()
         return true
     }
-
 }
