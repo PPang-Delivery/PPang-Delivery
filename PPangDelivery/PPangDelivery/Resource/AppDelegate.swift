@@ -8,6 +8,7 @@
 import UIKit
 
 let appColor: UIColor = .appColor
+@available(iOS 16.0, *)
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

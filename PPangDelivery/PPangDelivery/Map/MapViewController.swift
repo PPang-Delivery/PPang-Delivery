@@ -6,16 +6,16 @@
 //
 
 import UIKit
-import SnapKit
-import NMapsMap
+import Foundation
 import CoreLocation
 
-@available(iOS 16.0, *)
+import NMapsMap
+import SnapKit
+import Then
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate {
-    //	lazy var mainVC = MainViewController()
-    
+
     var naverMapView = NMFMapView()
-    
     var centerPin = NMFMarker()
     
     lazy var myLocationButton: UIButton = {
@@ -171,9 +171,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             guard let placemarks = placemarks,
                   let address = placemarks.last
             else { return }
-            let ppangAddress = "\(address)".split(separator: ", ")
-            print(address)
-            self.showPopUp(message: String(ppangAddress[1]))
+            
+            let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
+            self.showPopUp(message: ppangAddress[1])
         }
     }
     //        orderTogeterMarker.iconTintColor = .red
@@ -225,11 +225,10 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return members[row]
     }
     
-    private var titleText: String?
     private var messageText: String?
     private var attributedMessageText: NSAttributedString?
     private var contentView: UIView?
-    private let members: [String] = ["1","2","3","4","5","6","7","8"]
+    private let members: [String] = ["2","3","4","5","6","7","8"]
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -303,18 +302,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         return view
     }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = titleText
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 20.0, weight: .bold)
-        label.numberOfLines = 0
-        label.textColor = .black
         
-        return label
-    }()
-    
     private lazy var userInputText: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: 10.0)
@@ -332,7 +320,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         let label = UILabel()
         label.text = ("빵하실 위치 :  "+messageText!)
-        label.textAlignment = .left
         label.font = .systemFont(ofSize: 10.0)
         label.textColor = .gray
         label.numberOfLines = 0
@@ -344,33 +331,28 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return label
     }()
     
-    private lazy var dueTime: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
-        datePicker.preferredDatePickerStyle = .automatic
-        datePicker.datePickerMode = .time
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.timeZone = .autoupdatingCurrent
+    private lazy var dueTime: UIStackView = {
+        let view = UIStackView()
         
-        return datePicker
+        view.spacing = 5.0
+        view.distribution = .fill
+                
+        return view
     }()
     
-    lazy var numberOfMember: UIPickerView = {
-        let picker = UIPickerView()
-        picker.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
-        picker.backgroundColor = .white
-        picker.delegate = self
-        picker.dataSource = self
+    lazy var numberOfMemberStackView: UIStackView = {
+        let view = UIStackView()
         
-        return picker
+        view.spacing = 5.0
+        view.distribution = .fill
+        
+        return view
     }()
     
-    convenience init(titleText: String? = nil,
-                     messageText: String? = nil,
+    convenience init(messageText: String? = nil,
                      attributedMessageText: NSAttributedString? = nil) {
         self.init()
         
-        self.titleText = titleText
         self.messageText = messageText
         self.attributedMessageText = attributedMessageText
         modalPresentationStyle = .overFullScreen
@@ -389,6 +371,8 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         setupViews()
         addSubviews()
         makeConstraints()
+        getNumberOfMember()
+        getDueTime()
         makeFoodStack()
     }
     
@@ -435,6 +419,42 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         buttonStackView.addArrangedSubview(button)
     }
+    
+    public func getDueTime(){
+        let label = UILabel()
+        let datePicker = UIDatePicker()
+        
+        label.text = "몇시까지 모집할까요?"
+        
+        datePicker.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        datePicker.preferredDatePickerStyle = .automatic
+        datePicker.datePickerMode = .time
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.timeZone = .autoupdatingCurrent
+        datePicker.minimumDate = NSDate() as Date
+
+        dueTime.addArrangedSubview(label)
+        dueTime.addArrangedSubview(datePicker)
+    }
+    
+    public func getNumberOfMember() {
+        let label = UILabel()
+        let picker = UIPickerView()
+        
+        label.text = "몇명에서 빵하실건가요?"
+        label.textColor = .black
+
+        
+        picker.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+        picker.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
+        picker.backgroundColor = .white
+        picker.delegate = self
+        picker.dataSource = self
+        
+        numberOfMemberStackView.addArrangedSubview(label)
+        numberOfMemberStackView.addArrangedSubview(picker)
+
+    }
     public func makeFoodStack() {
         let stackFoodList = ["족발/보쌈", "찜/탕/찌개", "돈까스/회/일식", "피자", "치킨", "고기/구이", "야식", "양식", "중식", "아시안", "백반/죽/국수", "도시락", "분식", "카페/디저트", "패스트푸드", "채식"]
         let foodTitleLabel = UILabel()
@@ -447,27 +467,22 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         for (index, foodText) in stackFoodList.enumerated() {
             let button = UIButton()
-            button.titleLabel?.font = .systemFont(ofSize: 10.0, weight: .bold)
-            button.contentVerticalAlignment = .bottom
-            button.setTitle(foodText, for: .normal)
-            //            button.setImage(UIImage(systemName: foodText), for: .normal)
-            button.setTitleColor(.red, for: .normal)
-            button.backgroundColor = .yellow
-            button.layer.masksToBounds = false
+            button.setImage(UIImage(named: "chicken"), for: .normal)
+//            button.setImage(UIImage(named: foodText), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFit
+//            button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15)
+            
             button.snp.makeConstraints { make in
                 //                make.width.equalTo(containerView.snp.width).dividedBy(4)
                 make.height.width.equalTo(66)
             }
-            //button ui code with then
-            //            button.then {
-            //            }
             switch (index % 4) {
             case 0: v1FoodStackView.addArrangedSubview(button)
             case 1: v2FoodStackView.addArrangedSubview(button)
             case 2: v3FoodStackView.addArrangedSubview(button)
             case 3: v4FoodStackView.addArrangedSubview(button)
             default:
-                print("")
+                break
             }
         }
         foodStackView.addArrangedSubview(foodTitleLabel)
@@ -476,8 +491,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         foodStackView.addArrangedSubview(v3FoodStackView)
         foodStackView.addArrangedSubview(v4FoodStackView)
         //button action code
-        //            view.itemButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
-        //        }
+        //view.itemButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
     }
     
     private func setupViews() {
@@ -497,13 +511,12 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 containerStackView.addArrangedSubview(messageLabel)
                 messageLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
             }
-            //title appear
-            //            if let titleLabel = titleLabel {
-            //                containerStackView.addArrangedSubview(titleLabel)
-            //            }
+//            if let titleLabel = titleLabel {
+//                containerStackView.addArrangedSubview(titleLabel)
+//            }
             containerStackView.addArrangedSubview(foodStackView)
             containerStackView.addArrangedSubview(dueTime)
-            containerStackView.addArrangedSubview(numberOfMember)
+            containerStackView.addArrangedSubview(numberOfMemberStackView)
             containerStackView.addArrangedSubview(userInputText)
         }
         //        if let lastView = containerStackView.subviews.last {
@@ -537,7 +550,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 // MARK: - Extension
 
 extension UIColor {
-    /// Convert color to image
     func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { rendererContext in
             self.setFill()
@@ -585,15 +597,13 @@ extension UIControl {
 }
 
 extension UIViewController {
-    func showPopUp(title: String = "food list",
-                   message: String? = nil,
+    func showPopUp(message: String? = nil,
                    attributedMessage: NSAttributedString? = nil,
                    leftActionTitle: String? = "취소",
                    rightActionTitle: String = "확인",
                    leftActionCompletion: (() -> Void)? = nil,
                    rightActionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = PopUpViewController(titleText: title,
-                                                      messageText: message,
+        let popUpViewController = PopUpViewController(messageText: message,
                                                       attributedMessageText: attributedMessage)
         showPopUp(popUpViewController: popUpViewController,
                   leftActionTitle: leftActionTitle,

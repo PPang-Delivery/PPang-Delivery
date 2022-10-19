@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7087FD8528FB055A00A0E19C /* PPangboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7087FD8428FB055A00A0E19C /* PPangboardViewController.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		9507DE52A9B6D5C4657D211C /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8F8804AC7EA7407F1C8A24 /* Pods_PPangDelivery.framework */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
@@ -27,7 +26,6 @@
 		0978C855D0609CCA491F0A89 /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		0B8F8804AC7EA7407F1C8A24 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7087FD8228FAECEA00A0E19C /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPangDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7087FD8428FB055A00A0E19C /* PPangboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPangboardViewController.swift; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		91E8651130A470B232098734 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				CDBB84A328E9684200D6FCC4 /* MapViewController.swift */,
-				7087FD8428FB055A00A0E19C /* PPangboardViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7087FD8528FB055A00A0E19C /* PPangboardViewController.swift in Sources */,
 				CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */,
 				CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */,
 				CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */,
