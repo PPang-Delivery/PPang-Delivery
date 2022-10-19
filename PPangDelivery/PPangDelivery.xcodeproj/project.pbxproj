@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		52C9985C75B0CCDC9C7665CB /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */; };
-		6404FCDA28EF178400A63FEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6443632628EF114900324D27 /* Config.xcconfig */; };
 		6443632528EF0DD400324D27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6443632428EF0DD400324D27 /* GoogleService-Info.plist */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
-		9507DE52A9B6D5C4657D211C /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8F8804AC7EA7407F1C8A24 /* Pods_PPangDelivery.framework */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
 		CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */; };
@@ -29,7 +27,6 @@
 		1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		6443632128EF054200324D27 /* PPangDelivery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PPangDelivery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6443632428EF0DD400324D27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Resource/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6443632628EF114900324D27 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Resource/Config.xcconfig; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -165,7 +162,6 @@
 				70CB0B7F28EDBFBE0091AB33 /* _PPang.png */,
 				CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */,
 				CDBB849028E83AD500D6FCC4 /* LaunchScreen.storyboard */,
-				6443632628EF114900324D27 /* Config.xcconfig */,
 				CDBB849328E83AD500D6FCC4 /* Info.plist */,
 				6443632428EF0DD400324D27 /* GoogleService-Info.plist */,
 			);
@@ -184,6 +180,7 @@
 				CDBB847F28E83AD300D6FCC4 /* Frameworks */,
 				CDBB848028E83AD300D6FCC4 /* Resources */,
 				11D9BFD42DCAC77363015435 /* [CP] Embed Pods Frameworks */,
+				5D35260BF096512293DFABFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,7 +230,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849228E83AD500D6FCC4 /* LaunchScreen.storyboard in Resources */,
-				6404FCDA28EF178400A63FEA /* Config.xcconfig in Resources */,
 				6443632528EF0DD400324D27 /* GoogleService-Info.plist in Resources */,
 				70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */,
 				CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */,
@@ -258,6 +254,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D35260BF096512293DFABFA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F6CB97516F6C9622127A5EC0 /* [CP] Check Pods Manifest.lock */ = {
@@ -352,6 +365,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -413,6 +427,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -439,7 +454,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FD7AHY7SL;
+				DEVELOPMENT_TEAM = 8CB4B27BA3;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
@@ -470,7 +486,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FD7AHY7SL;
+				DEVELOPMENT_TEAM = 8CB4B27BA3;
+				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
