@@ -27,8 +27,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     lazy var orderTogetherButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("같이 먹어요 []", for: .normal)
-        btn.backgroundColor = UIColor.blue
         return btn
     }()
     
@@ -64,6 +62,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             lat: coordinate.lat,
             lng: coordinate.lng
         )
+        centerPin.captionText = "여기서 빵해요"
         centerPin.mapView = naverMapView
     }
     
@@ -82,8 +81,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         naverMapView.addSubview(orderTogetherButton)
         orderTogetherButton.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
         orderTogetherButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.right.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalTo(50)
+            $0.height.equalTo(100)
+            $0.center.equalTo(view.center)
         }
         naverMapView.addCameraDelegate(delegate: self)
         
@@ -97,6 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         print(currentCameraPosition.lat, currentCameraPosition.lng)
         
         centerPin.position = NMGLatLng(lat: cameraPosition.target.lat, lng: cameraPosition.target.lng)
+
     }
     
     func mapInit() {
@@ -161,7 +162,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     @objc
     private func didTappedOrderTogether(_ sender: UIButton) {
-        print("같이 먹어용 버튼 클릭됨")
         //        let orderTogeterMarker = NMFMarker()
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "Ko-kr")
@@ -426,7 +426,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         label.text = "몇시까지 모집할까요?"
         
-        datePicker.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
         datePicker.preferredDatePickerStyle = .automatic
         datePicker.datePickerMode = .time
         datePicker.locale = Locale(identifier: "ko-KR")
@@ -444,9 +443,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         label.text = "몇명에서 빵하실건가요?"
         label.textColor = .black
 
-        
-        picker.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
-        picker.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
         picker.backgroundColor = .white
         picker.delegate = self
         picker.dataSource = self
