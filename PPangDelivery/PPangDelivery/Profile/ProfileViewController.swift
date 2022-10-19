@@ -12,7 +12,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITextFieldDelegate {
 	
 	let label = UILabel()
 	
@@ -23,9 +23,10 @@ class ProfileViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		setup()
 		layout()
+
 	}
 	
 	func setup() {
@@ -78,6 +79,11 @@ class ProfileViewController: UIViewController {
 		
 		stvCell.addArrangedSubview(idTextField)
 		idTextField.then {
+			$0.textColor = .black
+			$0.backgroundColor = .appColor
+			$0.autocapitalizationType = .none
+			$0.keyboardType = .emailAddress
+			$0.textContentType = .emailAddress
 			$0.placeholder = "ID"
 		}.snp.makeConstraints {
 			$0.top.equalTo(self.idTextField.snp.bottom).offset(10)
@@ -87,6 +93,12 @@ class ProfileViewController: UIViewController {
 		
 		stvCell.addArrangedSubview(passwordTextField)
 		passwordTextField.then {
+			$0.textColor = .black
+			$0.backgroundColor = .appColor
+			$0.autocapitalizationType = .none
+			$0.textContentType = .password
+			$0.isSecureTextEntry = true
+			$0.keyboardType = .default
 			$0.placeholder = "PASSWORD"
 		}.snp.makeConstraints {
 			$0.top.equalTo(self.idTextField.snp.bottom).offset(10)
@@ -133,6 +145,7 @@ class ProfileViewController: UIViewController {
 		Auth.auth().signIn(withEmail: idTextField.text!, password: passwordTextField.text!) { (user, error) in
 			if user != nil {
 				print("login success")
+				self.viewDidLoad()
 			} else {
 				print("login failed")
 			}
@@ -140,14 +153,16 @@ class ProfileViewController: UIViewController {
 	}
 	
 	@objc func handleTap(sender: UITapGestureRecognizer) {
-		print("signinbutton press")
+		print("logout press")
 		let firebaseAuth = Auth.auth()
 		do {
 			try firebaseAuth.signOut()
+			self.viewDidLoad()
 		} catch let signOutError as NSError {
 			print("Error signing out: %@", signOutError)
 		}
 	}
 	
 }
+
 
