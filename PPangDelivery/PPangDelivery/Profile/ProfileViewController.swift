@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import GoogleSignIn
+import AuthenticationServices
 
 class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITextFieldDelegate {
 	
@@ -22,6 +23,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 	let orOauthLabel = UILabel()
 	var refreshButton = UIButton()
 	var googleLoginButton = GIDSignInButton()
+	var appleLoginButton = ASAuthorizationAppleIDButton()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -159,7 +161,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 //			$0.left.right.equalToSuperview()
 //		}
 		
-		GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
+//		GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
 		GIDSignIn.sharedInstance()?.presentingViewController = self
 		stvCell.addArrangedSubview(googleLoginButton)
 		googleLoginButton.then {
@@ -171,18 +173,15 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 			$0.left.right.equalToSuperview()
 		}
 		
-//
-//		var googleLoginBtn = GIDSignInButton().snp.makeConstraints{
-//
-//				$0.top.equalTo(self.label.snp.bottom).offset(10)
-//				$0.height.equalTo(40.0)
-//				$0.left.right.equalToSuperview()
-//		}
-//
-//		stvCell.addArrangedSubview(googleLoginBtn)
-//
-//		GIDSignIn.sharedInstance()?.presentingViewController = self // 로그인화면 불러오기
-
+		stvCell.addArrangedSubview(appleLoginButton)
+		appleLoginButton.then {
+			$0.backgroundColor = .black
+			$0.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+		}.snp.makeConstraints {
+			$0.top.equalTo(self.googleLoginButton.snp.bottom).offset(10)
+			$0.height.equalTo(40.0)
+			$0.left.right.equalToSuperview()
+		}
 	}
 	
 	@objc
@@ -216,4 +215,13 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 		}
 	}
 	
+	@objc
+	func handleAuthorizationAppleIDButtonPress() {
+		let appleIDProvider = ASAuthorizationAppleIDProvider()
+		let request = appleIDProvider.createRequest()
+		request.requestedScopes = [.fullName, .email]
+		
+		let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+		authorizationController.performRequests()
+	}
 }
