@@ -213,6 +213,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
 // MARK: - PPangTogetherPopup
 
 class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    private var messageText: String?
+    private var attributedMessageText: NSAttributedString?
+    private var contentView: UIView?
+    private let members: [String] = ["2","3","4","5","6","7","8"]
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -224,12 +230,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return members[row]
     }
-    
-    private var messageText: String?
-    private var attributedMessageText: NSAttributedString?
-    private var contentView: UIView?
-    private let members: [String] = ["2","3","4","5","6","7","8"]
-    
+        
     private lazy var containerView: UIView = {
         let view = UIView()
         // popup animation test
@@ -244,76 +245,64 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return view
     }()
     
-    private lazy var containerStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.spacing = 15.0
-        view.alignment = .center
-        
-        return view
-    }()
+    private lazy var containerStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 15.0
+        $0.alignment = .center
+    }
     
-    private lazy var buttonStackView: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 15.0
-        view.distribution = .fillEqually
-        
-        return view
-    }()
+    private lazy var buttonStackView = UIStackView().then {
+        $0.spacing = 15.0
+        $0.distribution = .fillEqually
+    }
     
-    private lazy var foodStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.alignment = .center
-        view.spacing = 5.0
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-    private lazy var v1FoodStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 5.0
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-    private lazy var v2FoodStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 5.0
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-    private lazy var v3FoodStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 5.0
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-    private lazy var v4FoodStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 5.0
-        view.distribution = .fillProportionally
-        
-        return view
-    }()
-        
-    private lazy var userInputText: UITextField = {
-        let textField = UITextField()
-        textField.font = .systemFont(ofSize: 10.0)
-        textField.center = self.view.center
-        textField.placeholder = "시키실 메뉴의 가게 이름과 추가로 요하는 정보를 기입해주세요"
-        //        textField.text = "UITextField example"
-        textField.borderStyle = UITextField.BorderStyle.line
-        textField.textColor = UIColor.blue
-        
-        return textField
-    }()
+    private lazy var foodStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.spacing = 5.0
+        $0.distribution = .fillProportionally
+    }
+    
+    private lazy var v1FoodStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 5.0
+        $0.distribution = .fillProportionally
+    }
+    private lazy var v2FoodStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 5.0
+        $0.distribution = .fillEqually
+    }
+    
+    private lazy var v3FoodStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 5.0
+        $0.distribution = .fillEqually
+    }
+    
+    private lazy var v4FoodStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 5.0
+        $0.distribution = .fillEqually
+    }
+    
+    private lazy var dueTime = UIStackView().then {
+        $0.spacing = 5.0
+        $0.distribution = .fill
+    }
+    
+    lazy var numberOfMemberStackView = UIStackView().then {
+        $0.spacing = 5.0
+        $0.distribution = .fill
+    }
+    
+    private lazy var userInputText = UITextField().then {
+        $0.font = .systemFont(ofSize: 10.0)
+        $0.center = self.view.center
+        $0.placeholder = "시키실 메뉴의 가게 이름과 추가로 요하는 정보를 기입해주세요"
+        $0.borderStyle = UITextField.BorderStyle.line
+        $0.textColor = UIColor.blue
+    }
     
     private lazy var messageLabel: UILabel? = {
         guard messageText != nil || attributedMessageText != nil else { return nil }
@@ -327,26 +316,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if let attributedMessageText = attributedMessageText {
             label.attributedText = attributedMessageText
         }
-        
         return label
-    }()
-    
-    private lazy var dueTime: UIStackView = {
-        let view = UIStackView()
-        
-        view.spacing = 5.0
-        view.distribution = .fill
-                
-        return view
-    }()
-    
-    lazy var numberOfMemberStackView: UIStackView = {
-        let view = UIStackView()
-        
-        view.spacing = 5.0
-        view.distribution = .fill
-        
-        return view
     }()
     
     convenience init(messageText: String? = nil,
@@ -464,10 +434,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         for (index, foodText) in stackFoodList.enumerated() {
             let button = UIButton()
             button.setImage(UIImage(named: "chicken"), for: .normal)
-//            button.setImage(UIImage(named: foodText), for: .normal)
             button.imageView?.contentMode = .scaleAspectFit
-//            button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15)
-            
             button.snp.makeConstraints { make in
                 //                make.width.equalTo(containerView.snp.width).dividedBy(4)
                 make.height.width.equalTo(66)
@@ -507,38 +474,30 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 containerStackView.addArrangedSubview(messageLabel)
                 messageLabel.heightAnchor.constraint(equalToConstant: 15.0).isActive = true
             }
-//            if let titleLabel = titleLabel {
-//                containerStackView.addArrangedSubview(titleLabel)
-//            }
             containerStackView.addArrangedSubview(foodStackView)
             containerStackView.addArrangedSubview(dueTime)
             containerStackView.addArrangedSubview(numberOfMemberStackView)
             containerStackView.addArrangedSubview(userInputText)
         }
-        //        if let lastView = containerStackView.subviews.last {
-        //            containerStackView.setCustomSpacing(24.0, after: lastView)
-        //        }
         containerStackView.addArrangedSubview(buttonStackView)
     }
     
     private func makeConstraints() {
-        containerStackView.translatesAutoresizingMaskIntoConstraints = false
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalTo(view).offset(25)
             make.trailing.equalTo(view).inset(25)
         }
-        NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
-            containerStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-            containerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -24),
-            containerStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
-            
-            buttonStackView.heightAnchor.constraint(equalToConstant: 48),
-            buttonStackView.widthAnchor.constraint(equalTo: containerStackView.widthAnchor)
-        ])
+        
+        containerStackView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalTo(containerView).inset(24)
+        }
+        
+        buttonStackView.snp.makeConstraints { make in
+            make.height.equalTo(45)
+            make.width.equalTo(containerStackView.snp.width)
+        }
     }
 }
 
