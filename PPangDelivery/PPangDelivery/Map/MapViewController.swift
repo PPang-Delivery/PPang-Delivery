@@ -8,15 +8,20 @@
 import UIKit
 import Foundation
 import CoreLocation
-
+import MapKit
 import NMapsMap
 import SnapKit
 import Then
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
 
     var naverMapView = NMFMapView()
     var centerPin = NMFMarker()
+    var address = ""
+    
+    let searchController = UISearchController()
+    
+    let searchRequest = MKLocalSearch.Request()
     
     lazy var myLocationButton: UIButton = {
         let btn = UIButton()
@@ -47,6 +52,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         setup()
         layout()
         markcenterPin()
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        navigationItem.searchController?.searchBar.showsBookmarkButton = true
+        searchController.searchBar.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
+        navigationItem.searchController?.searchBar.showsCancelButton = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +65,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     override func viewWillDisappear(_ animated: Bool) {
         self.locationManager.stopUpdatingLocation()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        address = text
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("ho")
     }
     
     func markcenterPin() {
@@ -158,6 +179,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     @objc
     private func didTappedCurrentLocation(_ sender: UIButton) {
         focusPurposeLocation(coordinate, 16.5)
+        searchRequest.naturalLanguageQuery = address
+        
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { [self] response, error in
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+
+            for item in response.mapItems {
+                print("강남역: ", item.placemark.coordinate.latitude, item.placemark.coordinate.longitude )
+                self.focusPurposeLocation(NMGLatLng(lat: item.placemark.coordinate.latitude, lng: item.placemark.coordinate.longitude), 16)
+            }
+        }
     }
     
     @objc
