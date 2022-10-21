@@ -11,6 +11,11 @@
 		6443632528EF0DD400324D27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6443632428EF0DD400324D27 /* GoogleService-Info.plist */; };
 		644945AD2902585A00FA9BC5 /* FIRFirestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644945AC2902585A00FA9BC5 /* FIRFirestore+Utils.swift */; };
 		644945B0290258BD00FA9BC5 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644945AF290258BD00FA9BC5 /* PlaceModel.swift */; };
+		648B0BB32902934B00CE0DC6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */; };
+		648B0BB82902935E00CE0DC6 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB42902935E00CE0DC6 /* ChatTextView.swift */; };
+		648B0BB92902935E00CE0DC6 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB52902935E00CE0DC6 /* CustomCell.swift */; };
+		648B0BBA2902935E00CE0DC6 /* CustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */; };
+		648B0BBB2902935E00CE0DC6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
@@ -32,6 +37,11 @@
 		644945AC2902585A00FA9BC5 /* FIRFirestore+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FIRFirestore+Utils.swift"; sourceTree = "<group>"; };
 		644945AF290258BD00FA9BC5 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		644945B12902653B00FA9BC5 /* PPangDelivery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PPangDelivery.entitlements; sourceTree = "<group>"; };
+		648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		648B0BB42902935E00CE0DC6 /* ChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
+		648B0BB52902935E00CE0DC6 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellModel.swift; sourceTree = "<group>"; };
+		648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +160,10 @@
 			isa = PBXGroup;
 			children = (
 				CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */,
+				648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */,
+				648B0BB42902935E00CE0DC6 /* ChatTextView.swift */,
+				648B0BB52902935E00CE0DC6 /* CustomCell.swift */,
+				648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -158,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				CDBB84A328E9684200D6FCC4 /* MapViewController.swift */,
+				648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -321,14 +336,19 @@
 				CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */,
 				644945AD2902585A00FA9BC5 /* FIRFirestore+Utils.swift in Sources */,
 				CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */,
+				648B0BBB2902935E00CE0DC6 /* ChatRoomViewController.swift in Sources */,
+				648B0BBA2902935E00CE0DC6 /* CustomCellModel.swift in Sources */,
 				CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */,
 				CDBB849C28E83F7800D6FCC4 /* UIViewController+Utils.swift in Sources */,
 				CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */,
 				CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */,
+				648B0BB32902934B00CE0DC6 /* PopUpViewController.swift in Sources */,
 				644945B0290258BD00FA9BC5 /* PlaceModel.swift in Sources */,
 				CDBB849A28E83E5200D6FCC4 /* MainViewController.swift in Sources */,
 				CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */,
 				CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */,
+				648B0BB92902935E00CE0DC6 /* CustomCell.swift in Sources */,
+				648B0BB82902935E00CE0DC6 /* ChatTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
