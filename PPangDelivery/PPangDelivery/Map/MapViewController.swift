@@ -6,26 +6,22 @@
 //
 
 import UIKit
-import SnapKit
-import NMapsMap
+import Foundation
 import CoreLocation
 import MapKit
+import NMapsMap
+import SnapKit
+import Then
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
-    
-    
-    //	lazy var mainVC = MainViewController()
-    
+
     var naverMapView = NMFMapView()
-    
     var centerPin = NMFMarker()
-    
     var address = ""
     
     let searchController = UISearchController()
     
     let searchRequest = MKLocalSearch.Request()
-    
     
     lazy var myLocationButton: UIButton = {
         let btn = UIButton()
@@ -36,8 +32,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     lazy var orderTogetherButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("같이 먹어요 []", for: .normal)
-        btn.backgroundColor = UIColor.blue
         return btn
     }()
     
@@ -60,6 +54,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         markcenterPin()
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+        navigationItem.searchController?.searchBar.showsBookmarkButton = true
+        searchController.searchBar.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
+        navigationItem.searchController?.searchBar.showsCancelButton = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,18 +67,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         self.locationManager.stopUpdatingLocation()
     }
     
-    func markcenterPin() {
-        centerPin.position = NMGLatLng(
-            lat: coordinate.lat,
-            lng: coordinate.lng
-        )
-        centerPin.mapView = naverMapView
-    }
-    
-    func setup() {
-        mapInit()
-    }
-    
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return
@@ -89,8 +74,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         address = text
     }
     
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("ho")
+    }
+    
+    func markcenterPin() {
+        centerPin.position = NMGLatLng(
+            lat: coordinate.lat,
+            lng: coordinate.lng
+        )
+        centerPin.captionText = "여기서 빵해요"
+        centerPin.mapView = naverMapView
+    }
+    
+    func setup() {
+        mapInit()
+    }
+    
     func layout() {
         naverMapView.addSubview(myLocationButton)
+        
         myLocationButton.addTarget(self, action: #selector(didTappedCurrentLocation(_:)), for: .touchDown)
         myLocationButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -99,8 +102,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         naverMapView.addSubview(orderTogetherButton)
         orderTogetherButton.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
         orderTogetherButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.right.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalTo(50)
+            $0.height.equalTo(100)
+            $0.center.equalTo(view.center)
         }
         naverMapView.addCameraDelegate(delegate: self)
         
@@ -114,6 +118,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         print(currentCameraPosition.lat, currentCameraPosition.lng)
         
         centerPin.position = NMGLatLng(lat: cameraPosition.target.lat, lng: cameraPosition.target.lng)
+
     }
     
     func mapInit() {
@@ -192,31 +197,70 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     @objc
     private func didTappedOrderTogether(_ sender: UIButton) {
-        print("같이 먹어용 버튼 클릭됨")
-        let orderTogeterMarker = NMFMarker()
-        orderTogeterMarker.iconTintColor = .red
-        orderTogeterMarker.position = NMGLatLng(lat: currentCameraPosition.lat, lng: currentCameraPosition.lng)
-        orderTogeterMarker.mapView = naverMapView
-        
+        //        let orderTogeterMarker = NMFMarker()
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: currentCameraPosition.lat,
+                                                   longitude: currentCameraPosition.lng),
+                                        preferredLocale: locale) { placemarks, _ in
+            guard let placemarks = placemarks,
+                  let address = placemarks.last
+            else { return }
+            
+            let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
+            self.showPopUp(message: ppangAddress[1])
+        }
     }
-    //    func initMapDB() {
-    //        DispatchQueue.global(qos: .default).async {
-    //            // 백그라운드 스레드
-    //            var markers = [NMFMarker]()
-    //            for index in 1...1000 {
-    //                let marker = NMFMarker(position: NMGLatLng(lat: Double.random(in: 37.4...37.9),
-    //                                                           lng: Double.random(in: 126.8...127.1))
-    //                )
-    //                marker.captionText = String(index)
-    //                markers.append(marker)
-    //            }
-    //
-    //            DispatchQueue.main.async { [weak self] in
-    //                // 메인 스레드
-    //                for marker in markers {
-    //                    marker.mapView = self?.naverMapView
-    //                }
-    //            }
-    //        }
-    //    }
+    //        orderTogeterMarker.iconTintColor = .red
+    //        orderTogeterMarker.position = NMGLatLng(lat: currentCameraPosition.lat, lng: currentCameraPosition.lng)
+    //        orderTogeterMarker.mapView = naverMapView
 }
+
+//    func initMapDB() {
+//        DispatchQueue.global(qos: .default).async {
+//            // 백그라운드 스레드
+//            var markers = [NMFMarker]()
+//            for index in 1...1000 {
+//                let marker = NMFMarker(position: NMGLatLng(lat: Double.random(in: 37.4...37.9),
+//                                                           lng: Double.random(in: 126.8...127.1))
+//                )
+//                marker.captionText = String(index)
+//                markers.append(marker)
+//            }
+//
+//            DispatchQueue.main.async { [weak self] in
+//                // 메인 스레드
+//                for marker in markers {
+//                    marker.mapView = self?.naverMapView
+//                }
+//            }
+//        }
+//    }
+
+// MARK: - Snapkit Preview
+
+//struct MapViewControllerPreViews: PreviewProvider {
+//    static var previews: some View {
+//        MapViewController().toPreview()
+//    }
+//}
+//import SwiftUI
+//
+//#if DEBUG
+//extension UIViewController {
+//    private struct Preview: UIViewControllerRepresentable {
+//        let viewController: UIViewController
+//
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            return viewController
+//        }
+//
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//        }
+//    }
+//
+//    func toPreview() -> some View {
+//        Preview(viewController: self)
+//    }
+//}
+//#endif

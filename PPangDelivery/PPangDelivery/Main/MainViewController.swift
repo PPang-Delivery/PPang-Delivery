@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
-    let homeVC = HomeViewController()
+//    let homeVC = HomeViewController()
     let mapVC = MapViewController()
     let chatVC = ChatViewController()
     let profileVC = ProfileViewController()
@@ -21,12 +21,12 @@ class MainViewController: UITabBarController {
         
         setupTabBar()
 
-        homeVC.setTabBarImage(imageName: "house.fill", title: "Home")
+//        homeVC.setTabBarImage(imageName: "house.fill", title: "Home")
         mapVC.setTabBarImage(imageName: "map.fill", title: "Map")
         chatVC.setTabBarImage(imageName: "message.fill", title: "Message")
         profileVC.setTabBarImage(imageName: "person.fill", title: "My")
 
-        let nc1 = UINavigationController(rootViewController: homeVC)
+//        let nc1 = UINavigationController(rootViewController: homeVC)
         let nc2 = UINavigationController(rootViewController: mapVC)
         let nc3 = UINavigationController(rootViewController: chatVC)
         let nc4 = UINavigationController(rootViewController: profileVC)
@@ -40,10 +40,10 @@ class MainViewController: UITabBarController {
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.appColor]
         navBarAppearance.backgroundEffect = .init(style: .dark)
         
-        nc1.navigationBar.standardAppearance = navBarAppearance
-        nc1.navigationBar.scrollEdgeAppearance = navBarAppearance
-//        nc2.navigationBar.standardAppearance = navBarAppearance
-//        nc2.navigationBar.scrollEdgeAppearance = navBarAppearance
+//        nc1.navigationBar.standardAppearance = navBarAppearance
+//        nc1.navigationBar.scrollEdgeAppearance = navBarAppearance
+        nc2.navigationBar.standardAppearance = navBarAppearance
+        nc2.navigationBar.scrollEdgeAppearance = navBarAppearance
         nc3.navigationBar.standardAppearance = navBarAppearance
         nc3.navigationBar.scrollEdgeAppearance = navBarAppearance
         nc4.navigationBar.standardAppearance = navBarAppearance
@@ -54,21 +54,21 @@ class MainViewController: UITabBarController {
 //        nc3.navigationBar.insertSubview(makeBlurView(nc3.navigationBar.bounds), at: 0)
 //        nc4.navigationBar.insertSubview(makeBlurView(nc4.navigationBar.bounds), at: 0)
         
-        nc1.navigationBar.topItem?.title = "Home"
+//        nc1.navigationBar.topItem?.title = "Home"
 //        nc1.navigationBar.prefersLargeTitles = true
-//        nc2.navigationBar.topItem?.title = "Map"
+        nc2.navigationBar.topItem?.title = "Map"
 //        nc2.navigationBar.prefersLargeTitles = true
         nc3.navigationBar.topItem?.title = "Chat"
         nc3.navigationBar.prefersLargeTitles = true
         nc4.navigationBar.topItem?.title = "Profile"
         nc4.navigationBar.prefersLargeTitles = true
 
-        nc1.navigationBar.tintColor = appColor
-//        nc2.navigationBar.tintColor = appColor
+//        nc1.navigationBar.tintColor = appColor
+        nc2.navigationBar.tintColor = appColor
         nc3.navigationBar.tintColor = appColor
         nc4.navigationBar.tintColor = appColor
         
-        viewControllers = [nc1, nc2, nc3, nc4]
+        viewControllers = [/*nc1, */nc2, nc3, nc4]
         
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundEffect = .init(style: .dark)
