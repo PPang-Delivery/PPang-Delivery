@@ -1,39 +1,60 @@
-//
-//  ChatViewController.swift
-//  PPangDelivery
-//
-//  Created by 스지 on 2022/10/02.
-//
 
 import UIKit
+import SnapKit
 
-class ChatViewController: UIViewController {
+
+class ChatViewController: UIViewController{
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints{ make in
+            make.left.right.bottom.equalTo(view)
+            make.top.equalTo(view).offset(40)
+        }
+        return tableView
+    }()
+    
+    var dataSource = [CustomCellModel]()
+    
+    
     
     let label = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
-        layout()
-    }
-    
-    func setup() {
         view.backgroundColor = .white
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Chat"
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
-        label.textAlignment = .center
+        setup()
+        loadData()
+    }
+
+    private func setup() {
+        tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
-    func layout() {
-        view.addSubview(label)
-        
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+    private func loadData() {
+        dataSource.append(.init(leftImage: UIImage(systemName: "pencil")!, leftTitle: "연필"))
+        dataSource.append(.init(leftImage: UIImage(systemName: "bookmark.fill")!, leftTitle: "북마크"))
+        tableView.reloadData()
     }
+}
+
+extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier) as? CustomCell ?? CustomCell()
+        cell.bind(model: dataSource[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
+    }
+    
 }
