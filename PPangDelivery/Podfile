@@ -20,6 +20,7 @@ target 'PPangDelivery' do
 	pod 'GoogleSignIn', '~> 5.0.2'
 	
 	pod 'Then'
+  pod 'IQKeyboardManagerSwift'
 
   # Pods for PPangDelivery
 end

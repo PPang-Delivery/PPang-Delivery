@@ -9,8 +9,10 @@ import UIKit
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseCore
+import IQKeyboardManagerSwift
 
 let appColor: UIColor = .appColor
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -61,6 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 		
 		GIDSignIn.sharedInstance()?.delegate = self
 		GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 100
+        
 		return true
 	}
 }
