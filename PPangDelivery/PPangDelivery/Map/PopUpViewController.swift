@@ -21,6 +21,8 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     private var attributedMessageText: NSAttributedString?
     private var contentView: UIView?
     private let members: [String] = ["2","3","4","5","6","7","8"]
+    private let textViewPlaceHolder = "ex) 당당치킨 시켜먹어요"
+
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -29,11 +31,21 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return members.count
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return members[row]
-    }
         
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        pickerView.subviews.forEach {
+            $0.backgroundColor = .clear
+        }
+        
+        let pickerViewLabel = UILabel()
+        pickerViewLabel.text = members[row]
+        pickerViewLabel.textAlignment = .center
+        
+        return pickerViewLabel
+    }
+    
+    
+    
     private lazy var containerView: UIView = {
         let view = UIView()
         // popup animation test
@@ -51,7 +63,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     private lazy var containerStackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 15.0
-        $0.alignment = .center
+        $0.alignment = .fill
     }
     
     private lazy var buttonStackView = UIStackView().then {
@@ -69,8 +81,9 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     private lazy var v1FoodStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 5.0
-        $0.distribution = .fillProportionally
+        $0.distribution = .fillEqually
     }
+    
     private lazy var v2FoodStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 5.0
@@ -97,14 +110,32 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     lazy var numberOfMemberStackView = UIStackView().then {
         $0.spacing = 5.0
         $0.distribution = .fill
+        $0.snp.makeConstraints { make in
+            make.height.equalTo(66)
+        }
     }
-    
-    private lazy var userInputText = UITextField().then {
-        $0.font = .systemFont(ofSize: 10.0)
-        $0.center = self.view.center
-        $0.placeholder = "시키실 메뉴의 가게 이름과 추가로 요하는 정보를 기입해주세요"
-        $0.borderStyle = UITextField.BorderStyle.line
-        $0.textColor = UIColor.blue
+        
+    private lazy var userInputText = UITextView().then {
+        // text
+        $0.text = textViewPlaceHolder
+        $0.textColor = .lightGray
+        $0.font = .systemFont(ofSize: 15.0)
+        $0.textAlignment = NSTextAlignment.justified
+
+        // layer
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.gray.cgColor
+        
+        // etc.
+        $0.returnKeyType = .done
+        $0.isEditable = true
+        
+        // Inset
+        $0.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10);
+        $0.contentInset = .zero
+        $0.scrollIndicatorInsets = .zero
+
+        $0.delegate = self
     }
     
     private lazy var messageLabel: UILabel? = {
@@ -216,7 +247,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         label.text = "몇명에서 빵하실건가요?"
         label.textColor = .black
 
-        picker.backgroundColor = .white
         picker.delegate = self
         picker.dataSource = self
         
@@ -306,6 +336,21 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
 
 // MARK: - Extension
+
+extension PopUpViewController: UITextViewDelegate {
+    public func textViewDidBeginEditing(_ textView: UITextView) {
+        if userInputText.text == textViewPlaceHolder {
+            userInputText.text = nil
+            userInputText.textColor = .black
+        }
+    }
+    func PopUpViewController(_ textView: UITextView) {
+        if userInputText.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            userInputText.text = textViewPlaceHolder
+            userInputText.textColor = .lightGray
+        }
+    }
+}
 
 extension UIColor {
     func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
