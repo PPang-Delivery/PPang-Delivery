@@ -12,6 +12,7 @@ import CoreLocation
 import NMapsMap
 import SnapKit
 import Then
+import DLRadioButton
 
 // MARK: - PPangTogetherPopup
 
@@ -263,25 +264,31 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         foodTitleLabel.textColor = .black
         foodTitleLabel.numberOfLines = 0
         foodTitleLabel.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+        let button = DLRadioButton()
+        button.layer.opacity = 0
+        button.heightAnchor.constraint(equalToConstant: 1.0).isActive = true
         
         for (index, foodText) in stackFoodList.enumerated() {
-            let button = UIButton()
-            button.setImage(UIImage(named: "chicken"), for: .normal)
-            button.imageView?.contentMode = .scaleAspectFit
-            button.snp.makeConstraints { make in
-                //                make.width.equalTo(containerView.snp.width).dividedBy(4)
+            let foodText = DLRadioButton()
+            foodText.icon = UIImage(named: "chicken") ?? button.icon
+            foodText.iconSelected = UIImage(named: "chicken2") ?? button.iconSelected
+//            button.setImage(UIImage(named: "chicken"), for: .normal)
+//            button.imageView?.contentMode = .scaleAspectFit
+            foodText.snp.makeConstraints { make in
                 make.height.width.equalTo(66)
             }
+            button.otherButtons.append(foodText)
             switch (index % 4) {
-            case 0: v1FoodStackView.addArrangedSubview(button)
-            case 1: v2FoodStackView.addArrangedSubview(button)
-            case 2: v3FoodStackView.addArrangedSubview(button)
-            case 3: v4FoodStackView.addArrangedSubview(button)
+            case 0: v1FoodStackView.addArrangedSubview(foodText)
+            case 1: v2FoodStackView.addArrangedSubview(foodText)
+            case 2: v3FoodStackView.addArrangedSubview(foodText)
+            case 3: v4FoodStackView.addArrangedSubview(foodText)
             default:
                 break
             }
         }
         foodStackView.addArrangedSubview(foodTitleLabel)
+        foodStackView.addArrangedSubview(button)
         foodStackView.addArrangedSubview(v1FoodStackView)
         foodStackView.addArrangedSubview(v2FoodStackView)
         foodStackView.addArrangedSubview(v3FoodStackView)

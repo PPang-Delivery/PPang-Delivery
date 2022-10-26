@@ -21,6 +21,7 @@ target 'PPangDelivery' do
 	
 	pod 'Then'
   pod 'IQKeyboardManagerSwift'
+  pod 'DLRadioButton', '~> 1.4'
 
   # Pods for PPangDelivery
 end
