@@ -11,8 +11,8 @@ import Then
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
-import GoogleSignIn
-import AuthenticationServices
+//import GoogleSignIn
+//import AuthenticationServices
 
 class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITextFieldDelegate {
 	
@@ -22,8 +22,8 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 	var signUpButton = UIButton()
 	let orOauthLabel = UILabel()
 	var refreshButton = UIButton()
-	var googleLoginButton = GIDSignInButton()
-	var appleLoginButton = ASAuthorizationAppleIDButton()
+//	var googleLoginButton = GIDSignInButton()
+//	var appleLoginButton = ASAuthorizationAppleIDButton()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -162,26 +162,26 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 //		}
 		
 //		GIDSignIn.sharedInstance()?.restorePreviousSignIn() // 자동로그인
-		GIDSignIn.sharedInstance()?.presentingViewController = self
-		stvCell.addArrangedSubview(googleLoginButton)
-		googleLoginButton.then {
-			$0.backgroundColor = .black
-		}.snp.makeConstraints {
-//			$0.top.equalTo(self.orOauthLabel.snp.bottom).offset(10)
-			$0.top.equalTo(self.refreshButton.snp.bottom).offset(10)
-			$0.height.equalTo(40.0)
-			$0.left.right.equalToSuperview()
-		}
-		
-		stvCell.addArrangedSubview(appleLoginButton)
-		appleLoginButton.then {
-			$0.backgroundColor = .black
-			$0.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-		}.snp.makeConstraints {
-			$0.top.equalTo(self.googleLoginButton.snp.bottom).offset(10)
-			$0.height.equalTo(40.0)
-			$0.left.right.equalToSuperview()
-		}
+//		GIDSignIn.sharedInstance()?.presentingViewController = self
+//		stvCell.addArrangedSubview(googleLoginButton)
+//		googleLoginButton.then {
+//			$0.backgroundColor = .black
+//		}.snp.makeConstraints {
+////			$0.top.equalTo(self.orOauthLabel.snp.bottom).offset(10)
+//			$0.top.equalTo(self.refreshButton.snp.bottom).offset(10)
+//			$0.height.equalTo(40.0)
+//			$0.left.right.equalToSuperview()
+//		}
+//
+//		stvCell.addArrangedSubview(appleLoginButton)
+//		appleLoginButton.then {
+//			$0.backgroundColor = .black
+//			$0.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+//		}.snp.makeConstraints {
+//			$0.top.equalTo(self.googleLoginButton.snp.bottom).offset(10)
+//			$0.height.equalTo(40.0)
+//			$0.left.right.equalToSuperview()
+//		}
 	}
 	
 	@objc
@@ -215,13 +215,13 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 		}
 	}
 	
-	@objc
-	func handleAuthorizationAppleIDButtonPress() {
-		let appleIDProvider = ASAuthorizationAppleIDProvider()
-		let request = appleIDProvider.createRequest()
-		request.requestedScopes = [.fullName, .email]
-		
-		let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-		authorizationController.performRequests()
-	}
+//	@objc
+//	func handleAuthorizationAppleIDButtonPress() {
+//		let appleIDProvider = ASAuthorizationAppleIDProvider()
+//		let request = appleIDProvider.createRequest()
+//		request.requestedScopes = [.fullName, .email]
+//
+//		let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//		authorizationController.performRequests()
+//	}
 }
