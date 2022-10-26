@@ -103,9 +103,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         orderTogetherButton.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
         orderTogetherButton.snp.makeConstraints {
             $0.width.equalTo(50)
-            $0.height.equalTo(55)
-            $0.bottom.equalTo(view.snp.centerY)
-            $0.centerX.equalTo(view.snp.centerX)
+            $0.height.equalTo(100)
+            $0.center.equalTo(view.center)
         }
         naverMapView.addCameraDelegate(delegate: self)
         
