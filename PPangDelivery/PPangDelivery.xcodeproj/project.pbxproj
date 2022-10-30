@@ -18,6 +18,7 @@
 		7045A8202902A7B600E8F79D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */; };
 		706C1801290A46AE003660A7 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C1800290A46AE003660A7 /* UIViewController.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
+		80AE1F8AA20ADF904AD2CD87 /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47684B983EF9E7AC20D34C8D /* Pods_PPangDelivery.framework */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
 		CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */; };
@@ -46,7 +47,8 @@
 		7045A8212902A85B00E8F79D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		706C1800290A46AE003660A7 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
-		BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E6317AFFDA1957DC1BB060C /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
+		8BD44FF50F9C4382B3B64EE5 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,7 +60,6 @@
 		CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CDBB84A728E9686100D6FCC4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CDBB84A928E9687000D6FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,28 +67,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52C9985C75B0CCDC9C7665CB /* Pods_PPangDelivery.framework in Frameworks */,
+				80AE1F8AA20ADF904AD2CD87 /* Pods_PPangDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		113B0DB09E91B32B747404AF /* Pods */ = {
+		47DCFC7F9426DCF29F9E9C4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */,
-				1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */,
+				47684B983EF9E7AC20D34C8D /* Pods_PPangDelivery.framework */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		644945AE2902587B00FA9BC5 /* Model */ = {
+		47F3076EDFBE7C7CF40A3C17 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				644945AF290258BD00FA9BC5 /* PlaceModel.swift */,
+				8BD44FF50F9C4382B3B64EE5 /* Pods-PPangDelivery.debug.xcconfig */,
+				7E6317AFFDA1957DC1BB060C /* Pods-PPangDelivery.release.xcconfig */,
 			);
-			path = Model;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		64B7371228EEBBA5002A6B75 /* Main */ = {
@@ -107,29 +108,19 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		91895F19824D1A61DE39A712 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		CDBB847928E83AD300D6FCC4 = {
 			isa = PBXGroup;
 			children = (
 				CDBB848428E83AD300D6FCC4 /* PPangDelivery */,
-				113B0DB09E91B32B747404AF /* Pods */,
-				91895F19824D1A61DE39A712 /* Frameworks */,
-				6443632128EF054200324D27 /* PPangDelivery.app */,
+				47F3076EDFBE7C7CF40A3C17 /* Pods */,
+				47DCFC7F9426DCF29F9E9C4E /* Frameworks */,
+				64D86E4C2909476100FE2F41 /* PPangDelivery.app */,
 			);
 			sourceTree = "<group>";
 		};
 		CDBB848428E83AD300D6FCC4 /* PPangDelivery */ = {
 			isa = PBXGroup;
 			children = (
-				644945B12902653B00FA9BC5 /* PPangDelivery.entitlements */,
-				644945AE2902587B00FA9BC5 /* Model */,
 				64B7371228EEBBA5002A6B75 /* Main */,
 				CDBB84A228E9683400D6FCC4 /* Map */,
 				CDBB84A128E9683000D6FCC4 /* Chat */,
@@ -161,11 +152,11 @@
 		CDBB84A128E9683000D6FCC4 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				64D86E4E2909478200FE2F41 /* ChatRoomViewController.swift */,
+				64D86E4F2909478200FE2F41 /* ChatTextView.swift */,
+				64D86E4D2909478200FE2F41 /* CustomCell.swift */,
+				64D86E502909478200FE2F41 /* CustomCellModel.swift */,
 				CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */,
-				648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */,
-				648B0BB42902935E00CE0DC6 /* ChatTextView.swift */,
-				648B0BB52902935E00CE0DC6 /* CustomCell.swift */,
-				648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -173,6 +164,7 @@
 		CDBB84A228E9683400D6FCC4 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				64D86E552909479600FE2F41 /* PopUpViewController.swift */,
 				CDBB84A328E9684200D6FCC4 /* MapViewController.swift */,
 				648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */,
 				706C1800290A46AE003660A7 /* UIViewController.swift */,
@@ -183,9 +175,9 @@
 		CDBB84AB28E968A100D6FCC4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				64D86E57290947B000FE2F41 /* FIRFirestore+Utils.swift */,
 				CDBB849B28E83F7800D6FCC4 /* UIViewController+Utils.swift */,
 				CDBB849D28E845B900D6FCC4 /* UIColor+Utils.swift */,
-				644945AC2902585A00FA9BC5 /* FIRFirestore+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -193,6 +185,7 @@
 		CDBB84AD28E9698500D6FCC4 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				64D86E4A2909470D00FE2F41 /* Info.plist */,
 				70CB0B7F28EDBFBE0091AB33 /* _PPang.png */,
 				7045A8212902A85B00E8F79D /* Info.plist */,
 				CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */,
@@ -214,7 +207,6 @@
 				CDBB847F28E83AD300D6FCC4 /* Frameworks */,
 				CDBB848028E83AD300D6FCC4 /* Resources */,
 				11D9BFD42DCAC77363015435 /* [CP] Embed Pods Frameworks */,
-				5D35260BF096512293DFABFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,7 +214,7 @@
 			);
 			name = PPangDelivery;
 			productName = PPUMPPAI;
-			productReference = 6443632128EF054200324D27 /* PPangDelivery.app */;
+			productReference = 64D86E4C2909476100FE2F41 /* PPangDelivery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -290,23 +282,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5D35260BF096512293DFABFA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F6CB97516F6C9622127A5EC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,22 +312,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */,
-				644945AD2902585A00FA9BC5 /* FIRFirestore+Utils.swift in Sources */,
+				64D86E58290947B000FE2F41 /* FIRFirestore+Utils.swift in Sources */,
 				CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */,
-				648B0BBB2902935E00CE0DC6 /* ChatRoomViewController.swift in Sources */,
-				648B0BBA2902935E00CE0DC6 /* CustomCellModel.swift in Sources */,
+				64D86E512909478200FE2F41 /* CustomCell.swift in Sources */,
 				CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */,
+				64D86E542909478200FE2F41 /* CustomCellModel.swift in Sources */,
 				CDBB849C28E83F7800D6FCC4 /* UIViewController+Utils.swift in Sources */,
 				CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */,
 				706C1801290A46AE003660A7 /* UIViewController.swift in Sources */,
 				CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */,
-				648B0BB32902934B00CE0DC6 /* PopUpViewController.swift in Sources */,
-				644945B0290258BD00FA9BC5 /* PlaceModel.swift in Sources */,
 				CDBB849A28E83E5200D6FCC4 /* MainViewController.swift in Sources */,
+				64D86E562909479600FE2F41 /* PopUpViewController.swift in Sources */,
 				CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */,
+				64D86E532909478200FE2F41 /* ChatTextView.swift in Sources */,
 				CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */,
-				648B0BB92902935E00CE0DC6 /* CustomCell.swift in Sources */,
-				648B0BB82902935E00CE0DC6 /* ChatTextView.swift in Sources */,
+				64D86E522909478200FE2F41 /* ChatRoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +381,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -469,7 +442,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -490,16 +462,13 @@
 		};
 		CDBB849728E83AD500D6FCC4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4E35D372EB2D6F17AFA0BB1 /* Pods-PPangDelivery.debug.xcconfig */;
+			baseConfigurationReference = 8BD44FF50F9C4382B3B64EE5 /* Pods-PPangDelivery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PPangDelivery/PPangDelivery.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FD7AHY7SL;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				DEVELOPMENT_TEAM = 8CB4B27BA3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
@@ -516,7 +485,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ppd.PPangDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -525,16 +493,13 @@
 		};
 		CDBB849828E83AD500D6FCC4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BC7DC08F3A00E02CB5C04C4 /* Pods-PPangDelivery.release.xcconfig */;
+			baseConfigurationReference = 7E6317AFFDA1957DC1BB060C /* Pods-PPangDelivery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PPangDelivery/PPangDelivery.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3FD7AHY7SL;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				DEVELOPMENT_TEAM = 8CB4B27BA3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "빵딜을 사용하기 위해 위치 권한이 필요합니다";
@@ -551,7 +516,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ppd.PPangDelivery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
