@@ -9,9 +9,11 @@ import UIKit
 import Foundation
 import CoreLocation
 import MapKit
+
 import NMapsMap
 import SnapKit
 import Then
+import FirebaseFirestore
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
 
@@ -103,8 +105,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         orderTogetherButton.addTarget(self, action: #selector(didTappedOrderTogether(_:)), for: .touchDown)
         orderTogetherButton.snp.makeConstraints {
             $0.width.equalTo(50)
-            $0.height.equalTo(100)
-            $0.center.equalTo(view.center)
+            $0.height.equalTo(55)
+            $0.bottom.equalTo(view.snp.centerY)
+            $0.centerX.equalTo(view.snp.centerX)
         }
         naverMapView.addCameraDelegate(delegate: self)
         
@@ -197,7 +200,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     
     @objc
     private func didTappedOrderTogether(_ sender: UIButton) {
-        //        let orderTogeterMarker = NMFMarker()
+        let orderTogetherMarker = NMFMarker()
+        let orderTogetherInfoWindow = NMFInfoWindow()
+        let FoodDataSource = NMFInfoWindowDefaultTextSource.data()
+        FoodDataSource.title = "KFC 시켜먹어요"
+        orderTogetherInfoWindow.dataSource = FoodDataSource
         let geocoder = CLGeocoder()
         let locale = Locale(identifier: "Ko-kr")
         geocoder.reverseGeocodeLocation(CLLocation(latitude: currentCameraPosition.lat,
@@ -211,9 +218,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             self.showPopUp(message: ppangAddress[1])
         }
     }
-    //        orderTogeterMarker.iconTintColor = .red
-    //        orderTogeterMarker.position = NMGLatLng(lat: currentCameraPosition.lat, lng: currentCameraPosition.lng)
-    //        orderTogeterMarker.mapView = naverMapView
 }
 
 //    func initMapDB() {
