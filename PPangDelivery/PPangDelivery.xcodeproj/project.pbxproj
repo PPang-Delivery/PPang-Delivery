@@ -16,6 +16,7 @@
 		648B0BBA2902935E00CE0DC6 /* CustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */; };
 		648B0BBB2902935E00CE0DC6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */; };
 		7045A8202902A7B600E8F79D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */; };
+		706C1801290A46AE003660A7 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C1800290A46AE003660A7 /* UIViewController.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
@@ -41,8 +42,9 @@
 		648B0BB52902935E00CE0DC6 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		648B0BB62902935E00CE0DC6 /* CustomCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellModel.swift; sourceTree = "<group>"; };
 		648B0BB72902935E00CE0DC6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
-		7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../my_PPang-Delivery/PPangDelivery/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7045A8212902A85B00E8F79D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		706C1800290A46AE003660A7 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		BE365C4246013EB83C4E29D3 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				CDBB84A328E9684200D6FCC4 /* MapViewController.swift */,
 				648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */,
+				706C1800290A46AE003660A7 /* UIViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */,
 				CDBB849C28E83F7800D6FCC4 /* UIViewController+Utils.swift in Sources */,
 				CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */,
+				706C1801290A46AE003660A7 /* UIViewController.swift in Sources */,
 				CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */,
 				648B0BB32902934B00CE0DC6 /* PopUpViewController.swift in Sources */,
 				644945B0290258BD00FA9BC5 /* PlaceModel.swift in Sources */,
@@ -494,7 +498,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3FD7AHY7SL;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
@@ -529,7 +533,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3FD7AHY7SL;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PPangDelivery/Info.plist;
