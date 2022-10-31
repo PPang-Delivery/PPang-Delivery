@@ -12,7 +12,7 @@ class MainViewController: UITabBarController {
     
 //    let homeVC = HomeViewController()
     let mapVC = MapViewController()
-    let chatVC = ChatViewController()
+    let chatVC = ConversationsViewController()
     let profileVC = ProfileViewController()
     
     override func viewDidLoad() {

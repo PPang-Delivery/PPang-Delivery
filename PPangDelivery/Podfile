@@ -11,6 +11,9 @@ target 'PPangDelivery' do
 	pod 'FirebaseAnalytics'
 	pod 'FirebaseAuth'
 	pod 'FirebaseFirestore'
+	pod 'FirebaseDatabase'
+	pod 'FirebaseStorage'
+	pod 'JGProgressHUD'
 	
 	pod 'Then'
   pod 'IQKeyboardManagerSwift'
