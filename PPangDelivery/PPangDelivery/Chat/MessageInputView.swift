@@ -7,7 +7,10 @@
 
 import UIKit
 
-
+extension UIColor {
+    static var sma = UIColor(named: "sma")
+    static var box = UIColor(named: "box")
+}
 protocol MessageInputViewDelegate: NSObject {
     func didTappedButton(textView: UITextView)
     func messageInputTextChanged(textView: UITextView, isIncreased: Bool)
@@ -48,11 +51,10 @@ extension MessageInputView {
         
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
-        
         textBox.translatesAutoresizingMaskIntoConstraints = false
         textBox.layer.shadowColor = UIColor.gray.cgColor;
-        textBox.backgroundColor = .gray
-        textBox.textColor = .white
+        textBox.backgroundColor = .box
+        textBox.textColor = .black
         textBox.font = UIFont.preferredFont(forTextStyle: .body)
         textBox.layer.cornerRadius = 21
 
@@ -88,7 +90,7 @@ extension MessageInputView {
         textBoxHeight?.isActive = true
 //
         NSLayoutConstraint.activate([
-            textBox.widthAnchor.constraint(equalToConstant: 200),
+            textBox.widthAnchor.constraint(equalToConstant: 250),
             bottomAnchor.constraint(equalToSystemSpacingBelow: textBox.bottomAnchor, multiplier: 0.5),
             textBox.centerXAnchor.constraint(equalTo: centerXAnchor),
 
@@ -125,7 +127,7 @@ extension MessageInputView: UITextViewDelegate {
         } else {
             button.isHidden = true
         }
-        let size = CGSize(width: 200, height: 100)
+        let size = CGSize(width: 250, height: 100)
         let estimatedSize = textView.sizeThatFits(size) // textView의 알맞는 현재 사이즈를 받아온다. 입력된 text 수의 따라 사이즈가 달라지는 거 같다.
 //        textView.constraints.forEach { (constraint) in
 //            if constraint.firstAttribute == .height {

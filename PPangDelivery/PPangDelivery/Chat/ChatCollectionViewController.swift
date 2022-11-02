@@ -31,7 +31,7 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        collectionView.backgroundColor = .orange
+        collectionView.backgroundColor = .box
         //        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = false
@@ -78,7 +78,7 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
             return
         }
         if message.uid == uid{
-            cell.containerView.backgroundColor = UIColor.magenta
+            cell.containerView.backgroundColor = .sma
             cell.textLabel.textColor = UIColor.white
             cell.containerViewRightAnchor?.isActive = true
             cell.containerViewLeftAnchor?.isActive = false
@@ -88,7 +88,6 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
             cell.containerViewRightAnchor?.isActive = false
             cell.containerViewLeftAnchor?.isActive = true
         }
-        
     }
     
     //    @objc
@@ -115,6 +114,11 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        delegate?.didTappedBackButton()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -152,13 +156,14 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
         view.addSubview(messageInputBar)
         
         
+        messageInputBar.backgroundColor = .sma
         NSLayoutConstraint.activate([
             messageInputBar.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: messageInputBar.trailingAnchor, multiplier: 0),
             messageInputBar.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 1)
         ])
         
-        view.backgroundColor = .white
+        view.backgroundColor = .sma
         NSLayoutConstraint.activate([
             chatCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             chatCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -243,7 +248,6 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 if let message = comments["message"] as? String, let uid = comments["uid"] as? String, let timestamp = comments["timestamp"] as? Int {
                     let comment = ChatModel.Comment(uid: uid, message: message, timestamp: timestamp)
                     self.messages.append(comment)
-                    print("commnet = \(comment)")
                 }
             }
         }

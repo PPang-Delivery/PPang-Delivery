@@ -31,7 +31,7 @@ class ConversationsViewController: UIViewController, NavigationDelegate {
     let tableView: UITableView = {
         let table = UITableView()
         table.isHidden = true
-        table.backgroundColor = .yellow
+        table.backgroundColor = .white
         table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         
         return table
@@ -50,6 +50,7 @@ class ConversationsViewController: UIViewController, NavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.prefersLargeTitles = false
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -120,12 +121,11 @@ extension ConversationsViewController: UITableViewDataSource{
         let model = users[indexPath.row]
         let vc = ChatCollectionViewController()
         vc.destinationUid = model.uid
-//        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        vc.title = model.userName
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
-        let nc = UINavigationController(rootViewController: vc)
-        nc.modalPresentationStyle = .fullScreen
-        nc.modalTransitionStyle = .coverVertical
+        
 //        present(nc, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
     }
