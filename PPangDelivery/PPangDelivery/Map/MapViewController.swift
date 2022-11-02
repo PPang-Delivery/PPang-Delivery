@@ -16,6 +16,8 @@ import Then
 import FirebaseFirestore
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
+    
+    let db = FirebaseService()
 
     var naverMapView = NMFMapView()
     var centerPin = NMFMarker()
@@ -217,7 +219,71 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
             self.showPopUp(message: ppangAddress[1])
         }
+        let date = Date()
+//        let unixTimestamp = 1480134638.0
+//        let date = Date(timeIntervalSince1970: unixTimestamp)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//        dateFormatter.locale = NSLocale.current
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let tmp = PlaceModel(category: "chicken",
+                             createdTime: Timestamp(),
+                             dueTime: Timestamp(),
+                             id: 1,
+                             location: GeoPoint(latitude: 1.111, longitude: 2.222),
+                             numberOfMember: 2,
+                             show: true,
+                             userInputData: "KFC")
+//        db.collection("place").document().setData(tmp) { err in
+//            if let err = err {
+//                print("Error writing document: \(err)")
+//            } else {
+//                print("Document successfully written!")
+//            }
+//        }
+        
+//        let dbcollection = Firestore.firestore().collection("place")
+//        dbcollection.addDocument(data: tmp)
+        var ref: DocumentReference? = nil
+        do {
+            ref = Firestore.firestore().collection("place").document()
+            guard let ref = ref else {
+                print("Reference is not exist.")
+                return
+            }
+            ref.setData(tmp.dictionary) { err in
+                if let err = err {
+                    print("Firestore>> Error adding document: \(err)")
+                    return
+                }
+                print("Firestore>> Document added!!!!!\(ref.documentID)")
+            }
+        }
+//        dbcollection.addDocument(data: tmp.asDictionary) { error in
+//            if let error = error {
+//                print("debug: \(error.localizedDescription)")
+//                return
+//            }
+//        }
+        //        guard let dictionary = tmp.asDictionary else {
+        //            print("decode error")
+        //            return
+        //        }
+        //        dbCollection.addDocument(data: ["createdTime":"123123", "ho1":"ha2"])
     }
+//    func uploadPost(caption: String, ownerName: String, ownerUid: String) {
+//        let data = ["caption": caption,
+//                    "ownerName": ownerName,
+//                    "ownerUid": ownerUid
+//        ]
+//
+//        Firestore.firestore().collection("post").addDocument(data: data) { error in
+//            if let error = error {
+//                print("DEBUG: \(error.localizedDescription)")
+//                return
+//            }
+//        }
+//    }
 }
 
 //    func initMapDB() {
