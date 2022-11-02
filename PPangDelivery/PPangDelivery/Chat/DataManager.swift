@@ -9,6 +9,17 @@ import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 
+
+extension Int {
+    var toDayTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let date = Date(timeIntervalSince1970: Double(self / 1000))
+        
+        return dateFormatter.string(from: date)
+    }
+}
 struct ChatAppUser {
     let userName: String
     let profileUrl: String
@@ -24,6 +35,7 @@ struct ChatModel {
     struct Comment {
         public var uid: String
         public var message: String
+        public var timestamp: Int
     }
 }
 

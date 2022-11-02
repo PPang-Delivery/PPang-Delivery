@@ -37,7 +37,7 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInsetAdjustmentBehavior = .never
         
-        //        collectionView.becomeFirstResponder()
+        //        collectionView.becomeFirstResponder()n
         return collectionView
     }()
     
@@ -47,12 +47,10 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
     var participantId: String?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("countcount = \(messages.count)")
         return messages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("get cell")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chatCell", for: indexPath) as! ChatMessageCell
         let message = messages[indexPath.row]
         cell.textLabel.text = message.message
@@ -80,7 +78,6 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
             return
         }
         if message.uid == uid{
-            print("get cell")
             cell.containerView.backgroundColor = UIColor.magenta
             cell.textLabel.textColor = UIColor.white
             cell.containerViewRightAnchor?.isActive = true
@@ -133,12 +130,11 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 }
             }
         }
-        //        if messages.count > 0 {
-        //            let index = IndexPath(row: messages.count == 0 ? 0 : messages.count - 1, section: 0)
-        //            tableView.scrollToRow(at: index, at: .middle, animated: false)
-        //        }
+        if self.messages.count > 0 {
+            let index = IndexPath(row: self.messages.count == 0 ? 0 : self.messages.count - 1, section: 0)
+            self.chatCollectionView.scrollToItem(at: index, at: .bottom, animated: false)
+        }
     }
-    
     //    override func viewWillAppear(_ animated: Bool) {
     //        super.viewWillAppear(animated)
     //        subscribeToKeyboardNotifications()
@@ -181,7 +177,8 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
         if let chatUid = chatRoomUid {
             let value: Dictionary<String, Any> = [
                 "uid": uid,
-                "message": text
+                "message": text,
+                "timestamp": ServerValue.timestamp()
             ]
             DataManager.shared.dataRef.child("chatrooms").child(chatUid).child("comments").childByAutoId().setValue(value)
         } else {
@@ -241,15 +238,18 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
     }
     func getComment(data: [String: Any]) {
         for (_, value) in data {
-            if let comments = value as? [String: String] {
+            if let comments = value as? [String: Any] {
                 //                print("get comment")
-                if let message = comments["message"], let uid = comments["uid"] {
-                    let comment = ChatModel.Comment(uid: uid, message: message)
+                if let message = comments["message"] as? String, let uid = comments["uid"] as? String, let timestamp = comments["timestamp"] as? Int {
+                    let comment = ChatModel.Comment(uid: uid, message: message, timestamp: timestamp)
                     self.messages.append(comment)
                     print("commnet = \(comment)")
                 }
             }
         }
+        self.messages = messages.sorted(by: {
+            $0.timestamp < $1.timestamp
+        })
     }
     func getMessage() {
         guard let chatRoomUid = self.chatRoomUid else {
@@ -262,6 +262,12 @@ class ChatCollectionViewController: UIViewController, UICollectionViewDelegate, 
                 self.getComment(data: value)
                 DispatchQueue.main.async {
                     self.chatCollectionView.reloadData()
+                    DispatchQueue.main.async {
+                        if self.messages.count > 0 {
+                            let index = IndexPath(row: self.messages.count - 1, section: 0)
+                            self.chatCollectionView.scrollToItem(at: index, at: .bottom, animated: false)
+                        }
+                    }
                 }
             }
         })
@@ -286,10 +292,10 @@ extension ChatCollectionViewController: MessageInputViewDelegate {
         }
         createRoom(text: text)
         //        messages.append(text)
-        if messages.count > 0 {
-            let index = IndexPath(row: messages.count == 0 ? 0 : messages.count - 1, section: 0)
-            chatCollectionView.scrollToItem(at: index, at: .bottom, animated: false)
-        }
+//        if messages.count > 0 {
+//            let index = IndexPath(row: messages.count - 1, section: 0)
+//            chatCollectionView.scrollToItem(at: index, at: .bottom, animated: false)
+//        }
     }
     
     func messageInputTextChanged(textView: UITextView, isIncreased: Bool) {
