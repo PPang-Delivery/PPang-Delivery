@@ -42,8 +42,7 @@
       allowLocationSimulation = "YES">
       <PathRunnable
          runnableDebuggingMode = "0"
-         BundleIdentifier = "me.ma.seokwoo.PPangDelivery"
-         FilePath = "/Users/maseog-u/Library/Developer/Xcode/DerivedData/PPangDelivery-gikjyiaowjistkfitudrucoxdijw/Build/Products/Debug-iphonesimulator/PPangDelivery.app">
+         FilePath = "/Users/junghyunyoo/Library/Developer/Xcode/DerivedData/PPangDelivery-ggycpolbadtzpphfgjbwzcvgqruq/Build/Products/Debug-iphonesimulator/PPangDelivery.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference

@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70353B48291241C700E46E64 /* FIRFirestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */; };
 		706C1801290A46AE003660A7 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C1800290A46AE003660A7 /* UIViewController.swift */; };
+		708E50452910032E004D5FB2 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */; };
+		70B555102910036E008CF595 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550B2910036E008CF595 /* ChatTextView.swift */; };
+		70B555112910036E008CF595 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550C2910036E008CF595 /* ChatViewController.swift */; };
+		70B555122910036E008CF595 /* CustomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550D2910036E008CF595 /* CustomCellModel.swift */; };
+		70B555132910036E008CF595 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550E2910036E008CF595 /* ChatRoomViewController.swift */; };
+		70B555142910036E008CF595 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550F2910036E008CF595 /* CustomCell.swift */; };
+		70B555172910037B008CF595 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B555162910037B008CF595 /* PlaceModel.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
 		80AE1F8AA20ADF904AD2CD87 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CB0EC8DA690BCD15402DF9A4 /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D3F6DF8C5E2C93B20D2EB /* Pods_PPangDelivery.framework */; };
@@ -33,12 +41,22 @@
 		CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB849D28E845B900D6FCC4 /* UIColor+Utils.swift */; };
 		CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A328E9684200D6FCC4 /* MapViewController.swift */; };
 		CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A928E9687000D6FCC4 /* HomeViewController.swift */; };
+		EC68D83EBDD2F583F47FB5B8 /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A4D3F6DF8C5E2C93B20D2EB /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FIRFirestore+Utils.swift"; sourceTree = "<group>"; };
+		7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7045A8212902A85B00E8F79D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		706C1800290A46AE003660A7 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		70B5550B2910036E008CF595 /* ChatTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
+		70B5550C2910036E008CF595 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		70B5550D2910036E008CF595 /* CustomCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellModel.swift; sourceTree = "<group>"; };
+		70B5550E2910036E008CF595 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
+		70B5550F2910036E008CF595 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		70B555162910037B008CF595 /* PlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		7E6317AFFDA1957DC1BB060C /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		8BD44FF50F9C4382B3B64EE5 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,8 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80AE1F8AA20ADF904AD2CD87 /* (null) in Frameworks */,
-				CB0EC8DA690BCD15402DF9A4 /* Pods_PPangDelivery.framework in Frameworks */,
+				80AE1F8AA20ADF904AD2CD87 /* BuildFile in Frameworks */,
+				EC68D83EBDD2F583F47FB5B8 /* Pods_PPangDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +100,7 @@
 		47DCFC7F9426DCF29F9E9C4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1A4D3F6DF8C5E2C93B20D2EB /* Pods_PPangDelivery.framework */,
+				2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,10 +131,10 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		CD3D678F290FACF20021B06F /* Model */ = {
+		70B555152910037B008CF595 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD3D6790290FACF20021B06F /* PlaceModel.swift */,
+				70B555162910037B008CF595 /* PlaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -133,7 +151,7 @@
 		CDBB848428E83AD300D6FCC4 /* PPangDelivery */ = {
 			isa = PBXGroup;
 			children = (
-				CD3D678F290FACF20021B06F /* Model */,
+				70B555152910037B008CF595 /* Model */,
 				64B7371228EEBBA5002A6B75 /* Main */,
 				CDBB84A228E9683400D6FCC4 /* Map */,
 				CDBB84A128E9683000D6FCC4 /* Chat */,
@@ -193,6 +211,7 @@
 			children = (
 				CDBB849B28E83F7800D6FCC4 /* UIViewController+Utils.swift */,
 				CDBB849D28E845B900D6FCC4 /* UIColor+Utils.swift */,
+				70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -329,15 +348,21 @@
 				CD3D679A290FB12C0021B06F /* MessageInputView.swift in Sources */,
 				CD3D67A2290FB1400021B06F /* StorageManager.swift in Sources */,
 				CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */,
-				CD3D6791290FACF20021B06F /* PlaceModel.swift in Sources */,
 				CD3D6794290FB1140021B06F /* ConversationsViewController.swift in Sources */,
+				CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */,
+				70B555172910037B008CF595 /* PlaceModel.swift in Sources */,
+				70B555132910036E008CF595 /* ChatRoomViewController.swift in Sources */,
+				70B555122910036E008CF595 /* CustomCellModel.swift in Sources */,
 				CDBB84A428E9684200D6FCC4 /* MapViewController.swift in Sources */,
+				708E50452910032E004D5FB2 /* PopUpViewController.swift in Sources */,
+				70B555142910036E008CF595 /* CustomCell.swift in Sources */,
 				CDBB849C28E83F7800D6FCC4 /* UIViewController+Utils.swift in Sources */,
 				CD3D67A0290FB1400021B06F /* ConversationTableViewCell.swift in Sources */,
 				CD3D6799290FB12C0021B06F /* ChatMessageCell.swift in Sources */,
 				706C1801290A46AE003660A7 /* UIViewController.swift in Sources */,
 				CD3D6792290FAD130021B06F /* PopUpViewController.swift in Sources */,
 				CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */,
+				70353B48291241C700E46E64 /* FIRFirestore+Utils.swift in Sources */,
 				CDBB849A28E83E5200D6FCC4 /* MainViewController.swift in Sources */,
 				CD3D67A1290FB1400021B06F /* Extensions.swift in Sources */,
 				CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */,

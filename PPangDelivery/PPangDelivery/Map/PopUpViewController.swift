@@ -13,15 +13,31 @@ import NMapsMap
 import SnapKit
 import Then
 import DLRadioButton
+import FirebaseFirestore
+import FirebaseAuth
 
 // MARK: - PPangTogetherPopup
+
+//protocol PopupObjects {
+//    func dataSend(category: String, createdTime: Timestamp, dueTime: Timestamp, location: GeoPoint, numberOfMember: Int, show: Bool, uid: String, userInputData: String)
+////    func sendCategory(category: String)
+////    func sendDueTime(dueTiime: Timestamp)
+////    func sendNumberOfMember(numberOfMember: Int)
+////    func sendUserInputData(userInputData: String)
+//}
 
 class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     private var messageText: String?
+    private var location: CLLocationCoordinate2D?
     private var contentView: UIView?
     private let members: [String] = ["2","3","4","5","6","7","8"]
     let textViewPlaceHolder = "ex) 당당치킨 시켜먹어요"
+//    var delegate: PopupObjects?
+    var selectedTime = Date()
+    var category: String = "no selected item"
+    var numberOfMember = ""
+    var modelValue = PlaceModel(category: "", createdTime: Timestamp(date: Date()),dueTime: Timestamp(date: Date()), uid: "", location: GeoPoint(latitude: 0, longitude: 0), numberOfMember: 0, show: false, userInputData: "")
     
     private lazy var containerView: UIView = {
         let view = UIView()
@@ -86,7 +102,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             make.height.equalTo(66)
         }
     }
-        
+    
     lazy var userInputText = UITextView().then {
         // text
         $0.text = textViewPlaceHolder
@@ -120,13 +136,13 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return label
     }()
     
-    convenience init(messageText: String? = nil) {
+    convenience init(messageText: String? = nil, location: CLLocationCoordinate2D) {
         self.init()
         
         self.messageText = messageText
+        self.location = location
         modalPresentationStyle = .overFullScreen
     }
-    
     convenience init(contentView: UIView) {
         self.init()
         
@@ -163,13 +179,16 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    public func addActionToButton(title: String? = nil,
+    public func addRightAction(title: String? = nil,
                                   titleColor: UIColor = .white,
-                                  backgroundColor: UIColor = .blue,
-                                  completion: (() -> Void)? = nil) {
+                                  backgroundColor: UIColor = .blue) {
+//                                  completion: (() -> Void)? = nil) {
         guard let title = title else { return }
         
         let button = UIButton()
+        
+//        let location = mapObject.currentCameraPosition
+
         button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         
         button.setTitle(title, for: .normal)
@@ -182,12 +201,50 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         button.layer.cornerRadius = 4.0
         button.layer.masksToBounds = true
         
-        button.addAction(for: .touchUpInside) { _ in
-            completion?()
+//        button.addAction(for: .touchUpInside) { _ in
+//            completion?()
+//        }
+        button.addAction(for: .touchUpInside) { [self] _ in
+            self.modelValue.category = self.category
+            self.modelValue.createdTime = Timestamp(date: Date())
+            self.modelValue.dueTime = Timestamp(date: selectedTime)
+            self.modelValue.uid = FirebaseAuth.Auth.auth().currentUser!.uid
+            self.modelValue.location = GeoPoint(latitude: self.location?.latitude ?? 0, longitude: self.location?.longitude ?? 0)
+            self.modelValue.numberOfMember = Int(numberOfMember) ?? 2
+            self.modelValue.show = true
+            self.modelValue.userInputData = userInputText.text
+            let dbcollection = Firestore.firestore().collection("place")
+            _ = try? dbcollection.addDocument(from: self.modelValue)
+            dismiss(animated: false)
         }
-        
         buttonStackView.addArrangedSubview(button)
     }
+    public func addLeftAction(title: String? = nil,
+                                  titleColor: UIColor = .white,
+                                  backgroundColor: UIColor = .blue) {
+//                                  completion: (() -> Void)? = nil) {
+        guard let title = title else { return }
+        
+        let button = UIButton()
+        
+        button.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.setBackgroundImage(backgroundColor.image(), for: .normal)
+        
+        button.setTitleColor(.gray, for: .disabled)
+        button.setBackgroundImage(UIColor.gray.image(), for: .disabled)
+        
+        button.layer.cornerRadius = 4.0
+        button.layer.masksToBounds = true
+        
+        button.addAction(for: .touchUpInside) { [self] _ in
+          dismiss(animated: false)
+        }
+        buttonStackView.addArrangedSubview(button)
+    }
+
     
     public func getDueTime(){
         let label = UILabel()
@@ -202,13 +259,16 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.minimumDate = NSDate() as Date
+//        self.selectedTime = datePicker.date
+        datePicker.addTarget(self, action: #selector(selectTime(_:)), for: .valueChanged)
+        print("datepicker = \(datePicker.date)")
         
+
 //        view.backgroundColor = .clear
 //        view.addSubview(datePicker)
 //        view.snp.makeConstraints { make in
 //            make.right =
 //        }
-        
 //        dateFormatter.dateFormat = "HH:mm"
 //        dateLabel.backgroundColor = .red
 //        dateLabel.text = dateFormatter.string(from: datePicker.date)
@@ -217,6 +277,12 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dueTime.addArrangedSubview(label)
         dueTime.addArrangedSubview(datePicker)
     }
+    @objc func selectTime(_ sender: UIDatePicker) {
+        selectedTime = sender.date
+        print("time value changed : \(selectedTime)")
+    }
+    
+    
     
     public func getNumberOfMember() {
         let label = UILabel()
@@ -230,7 +296,6 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         numberOfMemberStackView.addArrangedSubview(label)
         numberOfMemberStackView.addArrangedSubview(picker)
-
     }
     public func makeFoodStack() {
         let stackFoodList = ["jokbo", "jjim", "sushi", "pizza", "chicken", "barbeque", "midnight", "western", "chinese", "asian", "korean", "lunchbox", "bunsik", "cafe", "fastfood", "vegetable"]
@@ -248,6 +313,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         for (index, foodText) in stackFoodList.enumerated() {
             let foodButton = DLRadioButton()
             foodButton.icon = UIImage(named: foodText) ?? RadioButtonGroup.icon
+            foodButton.setTitle(foodText, for: .normal)
 //            foodButton.iconSelected = UIImage(named: "test") ?? RadioButtonGroup.iconSelected
 //            button.setImage(UIImage(named: "chicken"), for: .normal)
 //            button.imageView?.contentMode = .scaleAspectFit
@@ -263,6 +329,7 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             default:
                 break
             }
+            foodButton.addTarget(self, action: #selector(btnTouch(_:)), for: .touchDown)
         }
         foodStackView.addArrangedSubview(foodTitleLabel)
         foodStackView.addArrangedSubview(RadioButtonGroup)
@@ -334,4 +401,19 @@ class PopUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         return pickerViewLabel
     }
 
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        numberOfMember = members[row]
+    }
+            
+    @objc func btnTouch(_ sender:DLRadioButton) {
+        category = sender.currentTitle ?? ""
+//        if let category = sender.currentTitle {
+//            delegate?.sendCategory(category: category)
+            print("category from foodtext : \(category)")
+        }
+//        print("\(mapviewObject.modelValue.category = sender.currentTitle ?? "")")
+//        MapViewController.modelValue.category = sender.currentTitle ?? ""
+//    func updateModelValue() {
+//        print ("nananantest : \(mapviewObject.modelValue.category)")
+//    }
 }

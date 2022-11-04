@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//        mainVC.setStatusBar()
 		window?.rootViewController = mainVC
 		//        mainVC.selectedIndex = 1
-		FirebaseApp.configure()
+//		FirebaseApp.configure()
 		
       IQKeyboardManager.shared.enable = true
       IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false

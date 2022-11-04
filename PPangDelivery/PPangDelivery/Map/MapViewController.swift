@@ -14,10 +14,13 @@ import FirebaseAuth
 import NMapsMap
 import SnapKit
 import Then
+import FirebaseFirestoreSwift
 import FirebaseFirestore
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
-
+        
+    let db = FirebaseService()
+    let orderTogetherMarker = NMFMarker()
     var naverMapView = NMFMapView()
     var centerPin = NMFMarker()
     var address = ""
@@ -60,6 +63,69 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         navigationItem.searchController?.searchBar.showsBookmarkButton = true
         searchController.searchBar.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
         navigationItem.searchController?.searchBar.showsCancelButton = false
+        let dbCollection = Firestore.firestore().collection("place")
+                var listho: [PlaceModel] = []
+                
+                dbCollection.addSnapshotListener { [self] snapshot, error in
+                    guard let documents = snapshot?.documents else {
+                        print("Error Firestore fetching document: \(String(describing: error))")
+                        return
+                    }
+                    for i in documents {
+                        if let model = try? i.data(as: PlaceModel.self) {
+                            listho.append(model)
+                        } else {
+                            print("try errorrr")
+                        }
+                        
+                    }
+                    
+                    
+                    
+        //            Firestore.firestore().collection("place").document(user.uid).getDocument { snapshot, error in
+        //                guard let listho = try? snapshot?.data(as: User.self) else { return }
+        //
+        //                self.currentUser = userData
+        //            }
+                    
+                    
+        //            listho = documents.compactMap { doc -> PlaceModel? in
+        //                do {
+        //                    let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
+        //                    let creditCard = try JSONDecoder().decode(PlaceModel.self, from: jsonData)
+        //                    return creditCard
+        //                } catch let error {
+        //                    print("Error json parsing \(error)")
+        //                    return nil
+        //                }
+        //            }
+                    print(listho)
+        //            for i in listho {
+        //                print("ho")
+        //                self.ho(i: i.location)
+        //            }
+        //            DispatchQueue.global(qos: .default).async {
+                        // 백그라운드 스레드
+                        for i in listho {
+                            let marker = NMFMarker(position: NMGLatLng(lat: i.location.latitude,
+                                                                       lng: i.location.longitude)
+                            )
+
+                            marker.captionText = i.category
+                            marker.width = 30
+                            marker.height = 30
+                            marker.iconImage = NMFOverlayImage(image: UIImage(named: "porkHock")!)
+        //                    marker.touchHandler = NMFOverlayTouchHandler {
+        //
+        //                    }
+                            marker.touchHandler = {(overlay) -> Bool in
+                                print("오버레이 터치됨")
+                                return true
+                            }
+                            marker.mapView = self.naverMapView
+                        }
+        //            }
+                }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +135,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     override func viewWillDisappear(_ animated: Bool) {
         self.locationManager.stopUpdatingLocation()
     }
+    
+//    func dataSend(category: String, dueTime: Timestamp, numberOfMember: Int, userInputData: String) {
+//        self.modelValue.category = category
+//        self.modelValue.dueTime = dueTime
+//        self.modelValue.numberOfMember = numberOfMember
+//        self.modelValue.userInputData = userInputData
+//    }
+    
+//    func sendCategory(category: String) {
+//        modelValue.category = category
+//    }
+//
+//    func sendDueTime(dueTiime: Timestamp) {
+//        modelValue.dueTime = dueTiime
+//    }
+//
+//    func sendNumberOfMember(numberOfMember: Int) {
+//        modelValue.numberOfMember = numberOfMember
+//    }
+//
+//    func sendUserInputData(userInputData: String) {
+//        modelValue.userInputData = userInputData
+//    }
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
@@ -180,6 +269,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         print("error") // 위치 가져오기 실패
     }
     
+//    let pushPlaceModel() -> Void) {
+//        let tmp = PlaceModel(category: "chicken",
+//                             createdTime: Timestamp(date: Date()),
+//                             dueTime: Timestamp(date: Date()),
+//                             uid: FirebaseAuth.Auth.auth().currentUser!.uid,
+//                             location: GeoPoint(latitude: coordinate.lat, longitude: coordinate.lng),
+//                             numberOfMember: 2,
+//                             show: true,
+//                             userInputData: "KFC")
+//        modelValue.category = "chicken to pizza"
+//        let dbcollection = Firestore.firestore().collection("place")
+//        _ = try? dbcollection.addDocument(from: modelValue)
+//
+//    }
+
     @objc
     private func didTappedCurrentLocation(_ sender: UIButton) {
         focusPurposeLocation(coordinate, 16.5)
@@ -198,10 +302,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             }
         }
     }
+
     
     @objc
     private func didTappedOrderTogether(_ sender: UIButton) {
-        let orderTogetherMarker = NMFMarker()
+//        let orderTogetherMarker = NMFMarker()
         let orderTogetherInfoWindow = NMFInfoWindow()
         let FoodDataSource = NMFInfoWindowDefaultTextSource.data()
         FoodDataSource.title = "KFC 시켜먹어요"
@@ -216,18 +321,58 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             else { return }
             
             let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
-            self.showPopUp(message: ppangAddress[1])
+            self.showPopUp(message: ppangAddress[1], location: CLLocationCoordinate2D(latitude: self.currentCameraPosition.lat, longitude: self.currentCameraPosition.lng))
+//            self.showPopUp(message: ppangAddress[1], leftActionTitle: "취소", rightActionTitle: "확인", rightActionCompletion:  { [self] in
+//                modelValue.createdTime = Timestamp(date: Date())
+//                modelValue.show = true
+//                modelValue.uid = FirebaseAuth.Auth.auth().currentUser!.uid
+//                modelValue.location = GeoPoint(latitude: self.currentCameraPosition.lat,
+//                                                    longitude: self.currentCameraPosition.lng)
+//                modelValue.category = cateory
+//                let dbcollection = Firestore.firestore().collection("place")
+//                _ = try? dbcollection.addDocument(from: modelValue)
+//            })
         }
-        guard let selfUid = FirebaseAuth.Auth.auth().currentUser?.uid else {
-            return
-        }
-        let pinUid = "ehrkwehrjkwejr"
-        let pinEmail = "skjfndj@naver.com"
-        DataManager.shared.dataRef.child("users/\(selfUid)/chatUsers/\(pinUid)").setValue([
-            "email": pinEmail,
-            "uid": pinUid
-        ])
+//        var ref: DocumentReference? = nil
+//        do {
+//            ref = Firestore.firestore().collection("place").document()
+//            guard let ref = ref else {
+//                print("Reference is not exist.")
+//                return
+//            }
+//            ref.setData(tmp.dictionary) { err in
+//                if let err = err {
+//                    print("Firestore>> Error adding document: \(err)")
+//                    return
+//                }
+//                print("Firestore>> Document added!!!!!\(ref.documentID)")
+//            }
+//        }
+//        dbcollection.addDocument(data: tmp.asDictionary) { error in
+//            if let error = error {
+//                print("debug: \(error.localizedDescription)")
+//                return
+//            }
+//        }
+        //        guard let dictionary = tmp.asDictionary else {
+        //            print("decode error")
+        //            return
+        //        }
+        //        dbCollection.addDocument(data: ["createdTime":"123123", "ho1":"ha2"])
     }
+//    func uploadPost(caption: String, ownerName: String, ownerUid: String) {
+//        let data = ["caption": caption,
+//                    "ownerName": ownerName,
+//                    "ownerUid": ownerUid
+//        ]
+//
+//        Firestore.firestore().collection("post").addDocument(data: data) { error in
+//            if let error = error {
+//                print("DEBUG: \(error.localizedDescription)")
+//                return
+//            }
+//        }
+//    }
 }
 
 //    func initMapDB() {
@@ -250,6 +395,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
 //            }
 //        }
 //    }
+
 
 // MARK: - Snapkit Preview
 

@@ -13,6 +13,7 @@ target 'PPangDelivery' do
 	pod 'FirebaseFirestore'
 	pod 'FirebaseDatabase'
 	pod 'FirebaseStorage'
+  pod 'FirebaseFirestoreSwift'
 	pod 'JGProgressHUD'
 	
 	pod 'Then'
