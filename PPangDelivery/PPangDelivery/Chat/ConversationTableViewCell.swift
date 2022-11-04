@@ -57,20 +57,20 @@ class ConversationTableViewCell: UITableViewCell {
     public func configure(with model: ChatAppUser) {
         self.messageLabel.text = "hello"
         
-        self.userNameLabel.text = model.userName
-        let path = model.profileUrl
-        guard let url = URL(string: path) else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil, let data = data else {
-                    print("failed to load image")
-                    return
-                }
-                let image = UIImage(data: data)
-                self.userImageView.image = image
-            }
-        }.resume()
+        self.userNameLabel.text = model.email
+//        let path = model.profileUrl
+//        guard let url = URL(string: path) else {
+//            return
+//        }
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            DispatchQueue.main.async {
+//                guard error == nil, let data = data else {
+//                    print("failed to load image")
+//                    return
+//                }
+//                let image = UIImage(data: data)
+//                self.userImageView.image = image
+//            }
+//        }.resume()
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseAuth
 import FirebaseCore
+import FirebaseDatabase
+import FirebaseFirestore
 import JGProgressHUD
 
 struct Conversation {
@@ -50,6 +52,15 @@ class ConversationsViewController: UIViewController, NavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Firestore.firestore().collection("place").getDocuments { snapshot, error in
+            guard let snapshot = snapshot, error == nil else {
+                print("documents error")
+                return
+            }
+            for document in snapshot.documents {
+                print(document.data())
+            }
+        }
         navigationController?.navigationBar.prefersLargeTitles = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -75,14 +86,17 @@ class ConversationsViewController: UIViewController, NavigationDelegate {
         guard let selfUid = Auth.auth().currentUser?.uid else {
             return
         }
-        DataManager.shared.dataRef.child("users").observeSingleEvent(of: .value, with: { snapshot in
-            if let data = snapshot.value as? [String: Any] {
+        DataManager.shared.dataRef.child("users/\(selfUid)").observeSingleEvent(of: .value, with: { snapshot in
+            if let value = snapshot.value as? [String: Any] {
                 self.users.removeAll()
-                for (key, value) in data {
-                    if let value = value as? [String: String] {
-                        if let userName = value["userName"], let profileUrl = value["profileUrl"], let uid = value["uid"], selfUid != uid {
-                            let user = ChatAppUser(userName: userName, profileUrl: profileUrl, uid: uid)
-                            self.users.append(user)
+                if let chatUsers = value["chatUsers"] as? [String: Any] {
+                    for (_, value) in chatUsers {
+                        print(value)
+                        if let value = value as? [String: String] {
+                            if let uid = value["uid"], let email = value["email"] {
+                                let user = ChatAppUser(email: email, uid: uid)
+                                self.users.append(user)
+                            }
                         }
                     }
                 }
@@ -122,7 +136,7 @@ extension ConversationsViewController: UITableViewDataSource{
         let vc = ChatCollectionViewController()
         vc.destinationUid = model.uid
         self.tabBarController?.tabBar.isHidden = true
-        vc.title = model.userName
+        vc.title = model.email
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         
@@ -138,3 +152,35 @@ extension ConversationsViewController: UITableViewDataSource{
         self.tabBarController?.tabBar.isHidden = false
     }
 }
+
+
+//func didTappedPin() {
+//    guard let selfUid = FirebaseAuth.Auth.auth().currentUser?.uid else {
+//        return
+//    }
+//    let pinUid = "ehrkwehrjkwejr"
+//    let pinEmail = "skjfndj@naver.com"
+//    DataManager.shared.dataRef.child("users/\(selfUid)/chatUsers/\(pinUid)").setValue([
+//        "email": pinEmail,
+//        "uid": pinUid
+//    ])
+//    
+//    DataManager.shared.dataRef.child("users/\(selfUid)").observeSingleEvent(of: .value) { snapshot in
+//        guard let value = snapshot.value as? [String: Any] else {
+//            return
+//        }
+//        if let chatUsers = value["chatUsers"] as? [String: Any] {
+//
+//            chatUsers.description.append(contentsOf: <#T##S#>)
+//            for (_, value) in chatUsers {
+//                print(value)
+//                if let value = value as? [String: String] {
+//                    if let uid = value["uid"], let email = value["email"] {
+//                        let user = ChatAppUser(email: email, uid: uid)
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
+

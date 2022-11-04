@@ -11,6 +11,7 @@ import Then
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseDatabase
 //import GoogleSignIn
 //import AuthenticationServices
 
@@ -132,6 +133,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 		}
 		
 		stvCell.addArrangedSubview(signUpButton)
+        signUpButton.addTarget(self, action: #selector(didTappedSignUpButton), for: .primaryActionTriggered)
 		signUpButton.then {
 			$0.setTitle("Sign Up", for: .normal)
 			$0.backgroundColor = UIColor.blue
@@ -202,6 +204,31 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate, UITex
 			}
 		}
 	}
+    
+    @objc func didTappedSignUpButton() {
+        guard let password = passwordTextField.text, let email = idTextField.text else {
+            print("signUp error")
+            return
+        }
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            guard error == nil else {
+                print("login failed")
+                self.signInButton.titleLabel?.textColor = .red
+                return
+            }
+            let uid = FirebaseAuth.Auth.auth().currentUser?.uid
+            print("login success")
+            self.viewDidLoad()
+            Database.database().reference().child("users").child(uid!).setValue([
+                "email": "\(email)", "uid": uid
+            ]) { error, _ in
+                guard error == nil else {
+                    print("failed to write to database")
+                    return
+                }
+            }
+        }
+    }
 	
 	@objc func handleTap(sender: UITapGestureRecognizer) {
 		print("logout press")

@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import CoreLocation
 import MapKit
+import FirebaseAuth
 
 import NMapsMap
 import SnapKit
@@ -217,6 +218,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
             self.showPopUp(message: ppangAddress[1])
         }
+        guard let selfUid = FirebaseAuth.Auth.auth().currentUser?.uid else {
+            return
+        }
+        let pinUid = "ehrkwehrjkwejr"
+        let pinEmail = "skjfndj@naver.com"
+        DataManager.shared.dataRef.child("users/\(selfUid)/chatUsers/\(pinUid)").setValue([
+            "email": pinEmail,
+            "uid": pinUid
+        ])
     }
 }
 

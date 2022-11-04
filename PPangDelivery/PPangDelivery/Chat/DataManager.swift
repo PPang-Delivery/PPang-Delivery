@@ -21,8 +21,7 @@ extension Int {
     }
 }
 struct ChatAppUser {
-    let userName: String
-    let profileUrl: String
+    let email: String
     let uid: String
 //    let profilePictureUrl: String
     
@@ -75,7 +74,7 @@ extension DataManager {
         let uid = FirebaseAuth.Auth.auth().currentUser?.uid
         
         dataRef.child("users").child(uid!).setValue([
-            "userName" : "\(user.userName)", "profileUrl": user.profileUrl, "uid": user.uid
+            "userName" : "\(user.email)", "uid": user.uid
         ]) { error, _ in
             guard error == nil else {
                 print("failed to write to database")
