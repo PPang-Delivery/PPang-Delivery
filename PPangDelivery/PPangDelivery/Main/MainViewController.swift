@@ -12,7 +12,7 @@ class MainViewController: UITabBarController {
     
 //    let homeVC = HomeViewController()
     let mapVC = MapViewController()
-    let chatVC = ChatViewController()
+    let chatVC = ConversationsViewController()
     let profileVC = ProfileViewController()
     
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class MainViewController: UITabBarController {
         let nc2 = UINavigationController(rootViewController: mapVC)
         let nc3 = UINavigationController(rootViewController: chatVC)
         let nc4 = UINavigationController(rootViewController: profileVC)
-
+        
         let navBarAppearance = UINavigationBarAppearance()
 
 //        navBarAppearance.configureWithTransparentBackground()
@@ -68,11 +68,11 @@ class MainViewController: UITabBarController {
         nc3.navigationBar.tintColor = appColor
         nc4.navigationBar.tintColor = appColor
         
+        
         viewControllers = [/*nc1, */nc2, nc3, nc4]
         
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundEffect = .init(style: .dark)
-        
         tabBar.standardAppearance = tabBarAppearance
         tabBar.scrollEdgeAppearance = tabBarAppearance
     }

@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import CoreLocation
 import MapKit
+import FirebaseAuth
 
 import NMapsMap
 import SnapKit

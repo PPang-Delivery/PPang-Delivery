@@ -1,22 +1,24 @@
 //
-//  ChatTextView.swift
-//  PPangDelivery
+//  MessageInputView.swift
+//  FirebaseTest
 //
-//  Created by 지상률 on 2022/10/21.
+//  Created by 마석우 on 2022/10/14.
 //
 
-import Foundation
-import Foundation
 import UIKit
 
-
-protocol ChatMassegeDelegate: NSObject {
+extension UIColor {
+    static var sma = UIColor(named: "sma")
+    static var box = UIColor(named: "box")
+}
+protocol MessageInputViewDelegate: NSObject {
     func didTappedButton(textView: UITextView)
+    func messageInputTextChanged(textView: UITextView, isIncreased: Bool)
 }
 
-class subView: UIView {
+class MessageInputView: UIView {
     
-    weak var delegate: ChatMassegeDelegate?
+    weak var delegate: MessageInputViewDelegate?
     
     let textBox = UITextView()
     
@@ -28,7 +30,7 @@ class subView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         textBox.delegate = self
 
         style()
@@ -44,26 +46,18 @@ class subView: UIView {
     }
 }
 
-extension subView {
+extension MessageInputView {
     func style() {
         
         translatesAutoresizingMaskIntoConstraints = false
         clipsToBounds = true
-        
         textBox.translatesAutoresizingMaskIntoConstraints = false
         textBox.layer.shadowColor = UIColor.gray.cgColor;
-        //        textBox.layer.shadowOffset = CGSize(width: 0.75, height: 0.75)
-        //        textBox.layer.shadowOpacity = 0.4
-        //        textBox.layer.shadowRadius = 20
-        //        textBox.layer.masksToBounds = false
-        //        textBox.autocorrectionType = .no
-        //        textBox.text = placeholderText
-        textBox.backgroundColor = .gray
-        textBox.textColor = .white
+        textBox.backgroundColor = .box
+        textBox.textColor = .black
         textBox.font = UIFont.preferredFont(forTextStyle: .body)
         textBox.layer.cornerRadius = 21
-        //        textBox.contentInsetAdjustmentBehavior = .automatic
-        //        textBox.textContainer.lineBreakMode = .byWordWrapping
+
         textBox.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 40)
         textBox.isScrollEnabled = false
         
@@ -96,7 +90,7 @@ extension subView {
         textBoxHeight?.isActive = true
 //
         NSLayoutConstraint.activate([
-            textBox.widthAnchor.constraint(equalToConstant: 200),
+            textBox.widthAnchor.constraint(equalToConstant: 250),
             bottomAnchor.constraint(equalToSystemSpacingBelow: textBox.bottomAnchor, multiplier: 0.5),
             textBox.centerXAnchor.constraint(equalTo: centerXAnchor),
 
@@ -121,7 +115,7 @@ extension subView {
     }
 }
 
-extension subView: UITextViewDelegate {
+extension MessageInputView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             placeHolder.isHidden = false
@@ -133,7 +127,7 @@ extension subView: UITextViewDelegate {
         } else {
             button.isHidden = true
         }
-        let size = CGSize(width: 200, height: 100)
+        let size = CGSize(width: 250, height: 100)
         let estimatedSize = textView.sizeThatFits(size) // textView의 알맞는 현재 사이즈를 받아온다. 입력된 text 수의 따라 사이즈가 달라지는 거 같다.
 //        textView.constraints.forEach { (constraint) in
 //            if constraint.firstAttribute == .height {
@@ -145,11 +139,13 @@ extension subView: UITextViewDelegate {
 //                }
 //            }
 //        }
-        if estimatedSize.height < 150 { // 만약 estimatedSize의 height가 150보다 작다면 view와 textBox의 height constraint를 estimatedSize.height로 변경해준다.
+        if estimatedSize.height < 150, textBoxHeight?.constant != estimatedSize.height { // 만약 estimatedSize의 height가 150보다 작다면 view와 textBox의 height constraint를 estimatedSize.height로 변경해준다.
+            let isNegative = textBoxHeight!.constant > estimatedSize.height ? true : false
             textBoxHeight?.constant = estimatedSize.height
             viewHeight?.constant = estimatedSize.height + 8
+            delegate?.messageInputTextChanged(textView: textView, isIncreased: isNegative)
             layoutIfNeeded()
-            print(estimatedSize.height)
+//            print(estimatedSize.height)
         }
         if estimatedSize.height > 150 {
             textBox.isScrollEnabled = true
