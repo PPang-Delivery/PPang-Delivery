@@ -13,10 +13,11 @@ import MapKit
 import NMapsMap
 import SnapKit
 import Then
+import FirebaseFirestoreSwift
 import FirebaseFirestore
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
-    
+        
     let db = FirebaseService()
 
     var naverMapView = NMFMapView()
@@ -70,6 +71,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
     override func viewWillDisappear(_ animated: Bool) {
         self.locationManager.stopUpdatingLocation()
     }
+    
+//    func dataSend(category: String, dueTime: Timestamp, numberOfMember: Int, userInputData: String) {
+//        self.modelValue.category = category
+//        self.modelValue.dueTime = dueTime
+//        self.modelValue.numberOfMember = numberOfMember
+//        self.modelValue.userInputData = userInputData
+//    }
+    
+//    func sendCategory(category: String) {
+//        modelValue.category = category
+//    }
+//
+//    func sendDueTime(dueTiime: Timestamp) {
+//        modelValue.dueTime = dueTiime
+//    }
+//
+//    func sendNumberOfMember(numberOfMember: Int) {
+//        modelValue.numberOfMember = numberOfMember
+//    }
+//
+//    func sendUserInputData(userInputData: String) {
+//        modelValue.userInputData = userInputData
+//    }
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
@@ -181,6 +205,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         print("error") // 위치 가져오기 실패
     }
     
+//    let pushPlaceModel() -> Void) {
+//        let tmp = PlaceModel(category: "chicken",
+//                             createdTime: Timestamp(date: Date()),
+//                             dueTime: Timestamp(date: Date()),
+//                             uid: FirebaseAuth.Auth.auth().currentUser!.uid,
+//                             location: GeoPoint(latitude: coordinate.lat, longitude: coordinate.lng),
+//                             numberOfMember: 2,
+//                             show: true,
+//                             userInputData: "KFC")
+//        modelValue.category = "chicken to pizza"
+//        let dbcollection = Firestore.firestore().collection("place")
+//        _ = try? dbcollection.addDocument(from: modelValue)
+//
+//    }
+
     @objc
     private func didTappedCurrentLocation(_ sender: UIButton) {
         focusPurposeLocation(coordinate, 16.5)
@@ -199,10 +238,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             }
         }
     }
+
     
     @objc
     private func didTappedOrderTogether(_ sender: UIButton) {
-        let orderTogetherMarker = NMFMarker()
+//        let orderTogetherMarker = NMFMarker()
         let orderTogetherInfoWindow = NMFInfoWindow()
         let FoodDataSource = NMFInfoWindowDefaultTextSource.data()
         FoodDataSource.title = "KFC 시켜먹어요"
@@ -217,48 +257,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
             else { return }
             
             let ppangAddress = address.description.components(separatedBy: ", ").map{String($0)}
-            self.showPopUp(message: ppangAddress[1])
+            self.showPopUp(message: ppangAddress[1], location: CLLocationCoordinate2D(latitude: self.currentCameraPosition.lat, longitude: self.currentCameraPosition.lng))
+//            self.showPopUp(message: ppangAddress[1], leftActionTitle: "취소", rightActionTitle: "확인", rightActionCompletion:  { [self] in
+//                modelValue.createdTime = Timestamp(date: Date())
+//                modelValue.show = true
+//                modelValue.uid = FirebaseAuth.Auth.auth().currentUser!.uid
+//                modelValue.location = GeoPoint(latitude: self.currentCameraPosition.lat,
+//                                                    longitude: self.currentCameraPosition.lng)
+//                modelValue.category = cateory
+//                let dbcollection = Firestore.firestore().collection("place")
+//                _ = try? dbcollection.addDocument(from: modelValue)
+//            })
         }
-        let date = Date()
-//        let unixTimestamp = 1480134638.0
-//        let date = Date(timeIntervalSince1970: unixTimestamp)
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-//        dateFormatter.locale = NSLocale.current
-//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let tmp = PlaceModel(category: "chicken",
-                             createdTime: Timestamp(),
-                             dueTime: Timestamp(),
-                             id: 1,
-                             location: GeoPoint(latitude: 1.111, longitude: 2.222),
-                             numberOfMember: 2,
-                             show: true,
-                             userInputData: "KFC")
-//        db.collection("place").document().setData(tmp) { err in
-//            if let err = err {
-//                print("Error writing document: \(err)")
-//            } else {
-//                print("Document successfully written!")
+//        var ref: DocumentReference? = nil
+//        do {
+//            ref = Firestore.firestore().collection("place").document()
+//            guard let ref = ref else {
+//                print("Reference is not exist.")
+//                return
+//            }
+//            ref.setData(tmp.dictionary) { err in
+//                if let err = err {
+//                    print("Firestore>> Error adding document: \(err)")
+//                    return
+//                }
+//                print("Firestore>> Document added!!!!!\(ref.documentID)")
 //            }
 //        }
-        
-//        let dbcollection = Firestore.firestore().collection("place")
-//        dbcollection.addDocument(data: tmp)
-        var ref: DocumentReference? = nil
-        do {
-            ref = Firestore.firestore().collection("place").document()
-            guard let ref = ref else {
-                print("Reference is not exist.")
-                return
-            }
-            ref.setData(tmp.dictionary) { err in
-                if let err = err {
-                    print("Firestore>> Error adding document: \(err)")
-                    return
-                }
-                print("Firestore>> Document added!!!!!\(ref.documentID)")
-            }
-        }
 //        dbcollection.addDocument(data: tmp.asDictionary) { error in
 //            if let error = error {
 //                print("debug: \(error.localizedDescription)")
@@ -306,6 +331,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
 //            }
 //        }
 //    }
+
 
 // MARK: - Snapkit Preview
 

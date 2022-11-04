@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseCore
 
 class Firestore_Utils: Firestore {
 	func firebaseUpdateQuery(_ collection: String, _ field: String, _ updateData: [String:String]){
@@ -29,3 +30,12 @@ class Firestore_Utils: Firestore {
 		}
 	}
 }
+
+class FirebaseService: NSObject {
+    static let shared = FirebaseService()
+
+    override init() {
+         FirebaseApp.configure()
+    }
+}
+

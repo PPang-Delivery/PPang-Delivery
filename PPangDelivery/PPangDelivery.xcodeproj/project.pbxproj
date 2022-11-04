@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70353B48291241C700E46E64 /* FIRFirestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */; };
 		7045A8202902A7B600E8F79D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */; };
 		706C1801290A46AE003660A7 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C1800290A46AE003660A7 /* UIViewController.swift */; };
 		708E50452910032E004D5FB2 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */; };
@@ -16,9 +17,8 @@
 		70B555132910036E008CF595 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550E2910036E008CF595 /* ChatRoomViewController.swift */; };
 		70B555142910036E008CF595 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5550F2910036E008CF595 /* CustomCell.swift */; };
 		70B555172910037B008CF595 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B555162910037B008CF595 /* PlaceModel.swift */; };
-		70B555192910BC60008CF595 /* FIRFirestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B555182910BC60008CF595 /* FIRFirestore+Utils.swift */; };
 		70CB0B8028EDBFBE0091AB33 /* _PPang.png in Resources */ = {isa = PBXBuildFile; fileRef = 70CB0B7F28EDBFBE0091AB33 /* _PPang.png */; };
-		80AE1F8AA20ADF904AD2CD87 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		80AE1F8AA20ADF904AD2CD87 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CDBB848628E83AD300D6FCC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848528E83AD300D6FCC4 /* AppDelegate.swift */; };
 		CDBB848828E83AD300D6FCC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB848728E83AD300D6FCC4 /* SceneDelegate.swift */; };
 		CDBB848F28E83AD500D6FCC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBB848E28E83AD500D6FCC4 /* Assets.xcassets */; };
@@ -30,10 +30,13 @@
 		CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A528E9685700D6FCC4 /* ChatViewController.swift */; };
 		CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A728E9686100D6FCC4 /* ProfileViewController.swift */; };
 		CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBB84A928E9687000D6FCC4 /* HomeViewController.swift */; };
+		EC68D83EBDD2F583F47FB5B8 /* Pods_PPangDelivery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PPangDelivery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		648B0BB22902934B00CE0DC6 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FIRFirestore+Utils.swift"; sourceTree = "<group>"; };
 		7045A81F2902A7B600E8F79D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7045A8212902A85B00E8F79D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		706C1800290A46AE003660A7 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +46,6 @@
 		70B5550E2910036E008CF595 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		70B5550F2910036E008CF595 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		70B555162910037B008CF595 /* PlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
-		70B555182910BC60008CF595 /* FIRFirestore+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FIRFirestore+Utils.swift"; path = "../../../../../Desktop/PPang-Delivery/PPangDelivery/PPangDelivery/Utils/FIRFirestore+Utils.swift"; sourceTree = "<group>"; };
 		70CB0B7F28EDBFBE0091AB33 /* _PPang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _PPang.png; sourceTree = "<group>"; };
 		7E6317AFFDA1957DC1BB060C /* Pods-PPangDelivery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.release.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.release.xcconfig"; sourceTree = "<group>"; };
 		8BD44FF50F9C4382B3B64EE5 /* Pods-PPangDelivery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PPangDelivery.debug.xcconfig"; path = "Target Support Files/Pods-PPangDelivery/Pods-PPangDelivery.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,7 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80AE1F8AA20ADF904AD2CD87 /* (null) in Frameworks */,
+				80AE1F8AA20ADF904AD2CD87 /* BuildFile in Frameworks */,
+				EC68D83EBDD2F583F47FB5B8 /* Pods_PPangDelivery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +78,7 @@
 		47DCFC7F9426DCF29F9E9C4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C28508E964017C9A833D647 /* Pods_PPangDelivery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -182,7 +186,7 @@
 			children = (
 				CDBB849B28E83F7800D6FCC4 /* UIViewController+Utils.swift */,
 				CDBB849D28E845B900D6FCC4 /* UIColor+Utils.swift */,
-				70B555182910BC60008CF595 /* FIRFirestore+Utils.swift */,
+				70353B47291241C700E46E64 /* FIRFirestore+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -315,7 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDBB849E28E845B900D6FCC4 /* UIColor+Utils.swift in Sources */,
-				70B555192910BC60008CF595 /* FIRFirestore+Utils.swift in Sources */,
 				CDBB84A828E9686100D6FCC4 /* ProfileViewController.swift in Sources */,
 				70B555172910037B008CF595 /* PlaceModel.swift in Sources */,
 				70B555132910036E008CF595 /* ChatRoomViewController.swift in Sources */,
@@ -327,6 +330,7 @@
 				CDBB84A628E9685700D6FCC4 /* ChatViewController.swift in Sources */,
 				706C1801290A46AE003660A7 /* UIViewController.swift in Sources */,
 				CDBB84AA28E9687000D6FCC4 /* HomeViewController.swift in Sources */,
+				70353B48291241C700E46E64 /* FIRFirestore+Utils.swift in Sources */,
 				CDBB849A28E83E5200D6FCC4 /* MainViewController.swift in Sources */,
 				70B555112910036E008CF595 /* ChatViewController.swift in Sources */,
 				70B555102910036E008CF595 /* ChatTextView.swift in Sources */,
