@@ -19,7 +19,7 @@ import FirebaseFirestore
 class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapViewCameraDelegate, UISearchResultsUpdating {
         
     let db = FirebaseService()
-
+    let orderTogetherMarker = NMFMarker()
     var naverMapView = NMFMapView()
     var centerPin = NMFMarker()
     var address = ""
@@ -62,6 +62,69 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
         navigationItem.searchController?.searchBar.showsBookmarkButton = true
         searchController.searchBar.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
         navigationItem.searchController?.searchBar.showsCancelButton = false
+        let dbCollection = Firestore.firestore().collection("place")
+                var listho: [PlaceModel] = []
+                
+                dbCollection.addSnapshotListener { [self] snapshot, error in
+                    guard let documents = snapshot?.documents else {
+                        print("Error Firestore fetching document: \(String(describing: error))")
+                        return
+                    }
+                    for i in documents {
+                        if let model = try? i.data(as: PlaceModel.self) {
+                            listho.append(model)
+                        } else {
+                            print("try errorrr")
+                        }
+                        
+                    }
+                    
+                    
+                    
+        //            Firestore.firestore().collection("place").document(user.uid).getDocument { snapshot, error in
+        //                guard let listho = try? snapshot?.data(as: User.self) else { return }
+        //
+        //                self.currentUser = userData
+        //            }
+                    
+                    
+        //            listho = documents.compactMap { doc -> PlaceModel? in
+        //                do {
+        //                    let jsonData = try JSONSerialization.data(withJSONObject: doc.data(), options: [])
+        //                    let creditCard = try JSONDecoder().decode(PlaceModel.self, from: jsonData)
+        //                    return creditCard
+        //                } catch let error {
+        //                    print("Error json parsing \(error)")
+        //                    return nil
+        //                }
+        //            }
+                    print(listho)
+        //            for i in listho {
+        //                print("ho")
+        //                self.ho(i: i.location)
+        //            }
+        //            DispatchQueue.global(qos: .default).async {
+                        // 백그라운드 스레드
+                        for i in listho {
+                            let marker = NMFMarker(position: NMGLatLng(lat: i.location.latitude,
+                                                                       lng: i.location.longitude)
+                            )
+
+                            marker.captionText = i.category
+                            marker.width = 30
+                            marker.height = 30
+                            marker.iconImage = NMFOverlayImage(image: UIImage(named: "porkHock")!)
+        //                    marker.touchHandler = NMFOverlayTouchHandler {
+        //
+        //                    }
+                            marker.touchHandler = {(overlay) -> Bool in
+                                print("오버레이 터치됨")
+                                return true
+                            }
+                            marker.mapView = self.naverMapView
+                        }
+        //            }
+                }
     }
     
     override func viewWillAppear(_ animated: Bool) {
