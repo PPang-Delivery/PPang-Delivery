@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 // MARK: - Extension
 
@@ -74,45 +75,47 @@ extension UIViewController {
     func showPopUp(message: String? = nil,
                    leftActionTitle: String? = "취소",
                    rightActionTitle: String = "확인",
-                   leftActionCompletion: (() -> Void)? = nil,
-                   rightActionCompletion: (() -> Void)? = nil) {
-        let popUpViewController = PopUpViewController(messageText: message)
+                   location: CLLocationCoordinate2D) {
+//                   leftActionCompletion: (() -> Void)? = nil,
+//                   rightActionCompletion: (() -> Void)? = nil) {
+        let popUpViewController = PopUpViewController(messageText: message, location: location)
         showPopUp(popUpViewController: popUpViewController,
                   leftActionTitle: leftActionTitle,
-                  rightActionTitle: rightActionTitle,
-                  leftActionCompletion: leftActionCompletion,
-                  rightActionCompletion: rightActionCompletion)
+                  rightActionTitle: rightActionTitle
+//                  leftActionCompletion: leftActionCompletion,
+//                  rightActionCompletion: rightActionCompletion
+        )
     }
     
     func showPopUp(contentView: UIView,
                    leftActionTitle: String? = "취소",
-                   rightActionTitle: String = "확인",
-                   leftActionCompletion: (() -> Void)? = nil,
-                   rightActionCompletion: (() -> Void)? = nil) {
+                   rightActionTitle: String = "확인")
+//                   leftActionCompletion: (() -> Void)? = nil,
+//                   rightActionCompletion: (() -> Void)? = nil)
+    {
         let popUpViewController = PopUpViewController(contentView: contentView)
         
         showPopUp(popUpViewController: popUpViewController,
                   leftActionTitle: leftActionTitle,
-                  rightActionTitle: rightActionTitle,
-                  leftActionCompletion: leftActionCompletion,
-                  rightActionCompletion: rightActionCompletion)
+                  rightActionTitle: rightActionTitle
+//                  leftActionCompletion: leftActionCompletion,
+//                  rightActionCompletion: rightActionCompletion
+        )
     }
      func showPopUp(popUpViewController: PopUpViewController,
                            leftActionTitle: String?,
-                           rightActionTitle: String,
-                           leftActionCompletion: (() -> Void)?,
-                           rightActionCompletion: (() -> Void)?) {
-        popUpViewController.addActionToButton(title: leftActionTitle,
+                    rightActionTitle: String) {
+//                           leftActionCompletion: (() -> Void)?,
+//                           rightActionCompletion: (() -> Void)?) {
+        popUpViewController.addLeftAction(title: leftActionTitle,
                                               titleColor: .systemGray,
-                                              backgroundColor: .secondarySystemBackground) {
-            popUpViewController.dismiss(animated: false, completion: leftActionCompletion)
-        }
+                                              backgroundColor: .secondarySystemBackground)
+//            popUpViewController.dismiss(animated: false, completion: leftActionCompletion)
         
-        popUpViewController.addActionToButton(title: rightActionTitle,
+        popUpViewController.addRightAction(title: rightActionTitle,
                                               titleColor: .white,
-                                              backgroundColor: .blue) {
-            popUpViewController.dismiss(animated: false, completion: rightActionCompletion)
-        }
+                                              backgroundColor: .blue)
+//            popUpViewController.dismiss(animated: false, completion: rightActionCompletion)
         present(popUpViewController, animated: false, completion: nil)
     }
 }
