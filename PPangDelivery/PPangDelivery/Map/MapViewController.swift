@@ -114,7 +114,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, NMFMapView
                             marker.captionText = i.category
                             marker.width = 30
                             marker.height = 30
-                            marker.iconImage = NMFOverlayImage(image: UIImage(named: "porkHock")!)
+                            marker.iconImage = NMFOverlayImage(image: UIImage(named: "jokbo")!)
         //                    marker.touchHandler = NMFOverlayTouchHandler {
         //
         //                    }
