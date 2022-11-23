@@ -19,7 +19,7 @@
 ## 📸 Screenshots
 |Map View|Search Func|PopUp View|Chat View|Profile View|
 |---|---|---|---|---|
-|<img width="180" alt="Map View" src="https://user-images.githubusercontent.com/50796114/203492967-942c3b0c-a198-48d5-ac62-7f12aa40754c.png">|<img width="180" alt="Search Func" src="https://user-images.githubusercontent.com/50796114/203494527-84cd37df-e5c3-4bc9-902c-0e2d29d465ef.gif">|<img width="180" alt="Popup View" src="https://user-images.githubusercontent.com/50796114/203505709-df10085e-c419-45f6-b01f-e45be5b1ae21.png">|<img width="180" alt="Chat View" src="https://user-images.githubusercontent.com/50796114/203493265-173ce87c-c9a6-42cc-8bed-0a48befc2116.gif">|<img width="180" alt="Profile View" src="https://user-images.githubusercontent.com/50796114/203493169-4a111096-1384-462f-a1ea-cb6680771b67.png">|
+|<img width="150" height="300" alt="Map View" src="https://user-images.githubusercontent.com/50796114/203492967-942c3b0c-a198-48d5-ac62-7f12aa40754c.png">|<img width="150" height="300"  alt="Search Func" src="https://user-images.githubusercontent.com/50796114/203494527-84cd37df-e5c3-4bc9-902c-0e2d29d465ef.gif">|<img width="150" height="300"  alt="Popup View" src="https://user-images.githubusercontent.com/50796114/203505709-df10085e-c419-45f6-b01f-e45be5b1ae21.png">|<img width="150" height="300"  alt="Chat View" src="https://user-images.githubusercontent.com/50796114/203493265-173ce87c-c9a6-42cc-8bed-0a48befc2116.gif">|<img width="150" height="300"  alt="Profile View" src="https://user-images.githubusercontent.com/50796114/203493169-4a111096-1384-462f-a1ea-cb6680771b67.png">|
 
 ## 🛠Development Environment
 ![Generic badge](https://img.shields.io/badge/iOS-15.0+-lightgrey.svg) ![Generic badge](https://img.shields.io/badge/Xcode-13.0-blue.svg)
